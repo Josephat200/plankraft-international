@@ -67,7 +67,7 @@
   .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
   .team-card { border-top: 1px solid var(--warm); padding-top: 2rem; }
 
-  .team-initials { width: 56px; height: 56px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: var(--warm); border: 0.5px solid rgba(180,134,74,0.3); margin-bottom: 1.25rem; }
+  .team-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(180,134,74,0.45); margin-bottom: 1.25rem; display: block; }
   .team-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.35rem; color: var(--stone); margin-bottom: 0.2rem; }
   .team-role { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin-bottom: 1.25rem; }
   .team-bio { font-size: 0.88rem; color: var(--mid); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
@@ -83,7 +83,116 @@
   .philosophy-strip blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; font-style: italic; line-height: 1.5; max-width: 700px; color: rgba(255,255,255,0.9); }
   .philosophy-strip cite { display: block; margin-top: 1.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm); font-style: normal; font-weight: 500; }
 
-  footer { padding: 2.5rem 3rem; border-top: 0.5px solid rgba(44,42,38,0.12); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--mid); font-weight: 300; }
+  .contact-wrap { padding: 4rem 3rem; background: linear-gradient(180deg, rgba(245,242,238,0.35) 0%, rgba(255,255,255,1) 45%); }
+  .contact-intro { max-width: 680px; margin-bottom: 2.5rem; }
+  .contact-intro p { font-size: 1rem; color: var(--mid); line-height: 1.9; font-weight: 300; }
+  .contact-grid { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.2fr); gap: 2rem; align-items: stretch; }
+  .contact-card { border: 0.5px solid rgba(44,42,38,0.14); background: #fff; padding: 2rem; box-shadow: 0 18px 40px rgba(44,42,38,0.06); }
+  .contact-list { list-style: none; }
+  .contact-list li { padding: 0.85rem 0; border-bottom: 0.5px solid rgba(44,42,38,0.1); }
+  .contact-list li:last-child { border-bottom: 0; }
+  .contact-label { display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin-bottom: 0.25rem; }
+  .contact-value { color: var(--stone); font-size: 0.95rem; }
+  .contact-value a { color: #2458b8; text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+  .directions-tools { margin-top: 1.2rem; padding-top: 1.1rem; border-top: 0.5px solid rgba(44,42,38,0.1); }
+  .directions-tools label { display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin-bottom: 0.45rem; }
+  .directions-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .directions-input { flex: 1; min-width: 220px; border: 0.5px solid rgba(44,42,38,0.25); padding: 0.65rem 0.7rem; font-size: 0.88rem; color: var(--stone); }
+  .mini-btn { border: 0.5px solid rgba(44,42,38,0.28); background: #fff; color: var(--stone); padding: 0.62rem 0.8rem; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+  .mini-btn:hover { background: var(--stone); color: #fff; }
+  .directions-note { margin-top: 0.5rem; font-size: 0.8rem; color: var(--mid); }
+  .directions-note a { color: #2458b8; text-decoration: none; }
+  .directions-note a:hover { text-decoration: underline; }
+  .social-title { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin: 1.5rem 0 0.9rem; }
+  .social-links { display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr)); gap: 0.75rem; }
+  .social-link {
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    border: 0.5px solid rgba(44,42,38,0.2); padding: 0.6rem 0.8rem; text-decoration: none;
+    color: var(--stone); background: #fff; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500;
+  }
+  .social-link:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(44,42,38,0.1); border-color: rgba(180,134,74,0.55); }
+  .social-icon { width: 15px; height: 15px; flex-shrink: 0; fill: currentColor; }
+  .social-link.tiktok { color: #111; }
+  .social-link.instagram { color: #b1328c; }
+  .social-link.x { color: #111; }
+  .social-link.whatsapp { color: #138c43; }
+  .map-wrap { min-height: 420px; border: 0.5px solid rgba(44,42,38,0.14); overflow: hidden; box-shadow: 0 18px 40px rgba(44,42,38,0.06); }
+  .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; min-height: 420px; }
+
+  .site-footer {
+    background: linear-gradient(180deg, #1f1d1a 0%, #171513 100%);
+    color: rgba(255,255,255,0.86);
+    margin-top: 2rem;
+    border-top: 1px solid rgba(180,134,74,0.35);
+  }
+  .footer-main {
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2rem;
+  }
+  .footer-brand { max-width: 460px; }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+  .footer-logo span { color: var(--warm); }
+  .footer-copy {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.8;
+  }
+  .footer-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+  .footer-list { list-style: none; display: grid; gap: 0.45rem; }
+  .footer-list a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.84rem; }
+  .footer-list a:hover { color: #fff; text-decoration: underline; }
+  .footer-line { font-size: 0.84rem; color: rgba(255,255,255,0.82); margin-bottom: 0.35rem; }
+  .footer-line a { color: rgba(255,255,255,0.82); text-decoration: none; }
+  .footer-line a:hover { color: #fff; text-decoration: underline; }
+  .footer-bottom {
+    border-top: 0.5px solid rgba(255,255,255,0.14);
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.74rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .footer-mini-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .footer-mini-links a { color: rgba(255,255,255,0.78); text-decoration: none; }
+  .footer-mini-links a:hover { color: #fff; text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 1rem; flex-wrap: wrap; }
+    .hero, .page-header, .section-body, .about-section, .philosophy-strip, .contact-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .map-wrap, .map-wrap iframe { min-height: 320px; }
+    .social-links { grid-template-columns: 1fr 1fr; }
+    .directions-input { min-width: 100%; }
+    .footer-main { padding: 2rem 1.25rem; grid-template-columns: 1fr; }
+    .footer-bottom { padding: 1rem 1.25rem; flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 560px) {
+    .social-links { grid-template-columns: 1fr; }
+  }
+
 </style>
 
 <div class="pk-site">
@@ -93,6 +202,7 @@
       <li><a href="#" class="active" onclick="showSection('home', this); return false;">Home</a></li>
       <li><a href="#" onclick="showSection('what-we-do', this); return false;">What We Do</a></li>
       <li><a href="#" onclick="showSection('who-we-are', this); return false;">Who We Are</a></li>
+      <li><a href="#" onclick="showSection('contact-us', this); return false;">Contact Us</a></li>
     </ul>
   </nav>
 
@@ -177,7 +287,7 @@
 
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-initials">MCM</div>
+          <img class="team-photo" src="MWITA PIC.png" alt="Mwita Christopher Mangiti">
           <div class="team-name">Mwita Christopher Mangiti</div>
           <div class="team-role">Architect</div>
           <p class="team-bio">Mwita is an architect with a broad design range spanning commercial and hospitality projects, with a strong command of both architecture and interior design. He approaches every project holistically &mdash; from initial concept and spatial planning through to detailed design, documentation, and construction. His fluency in BIM workflows ensures precision and coordination at every stage of the process. On-site, he applies the same rigour to supervision, ensuring design intent is preserved through to completion. Skilled in 3D visualisation and miniature model-making, he brings ideas to life early, giving clients a clear and confident picture of the finished project. He takes each commission from brief to handover, managing the full journey with clarity and care.</p>
@@ -193,7 +303,7 @@
         </div>
 
         <div class="team-card">
-          <div class="team-initials">KKJ</div>
+          <img class="team-photo" src="KISIA PIC.jpg.jpeg" alt="Kisia Kibiyi Julius">
           <div class="team-name">Kisia Kibiyi Julius</div>
           <div class="team-role">Architect</div>
           <p class="team-bio">Kisia is an architect for whom the discipline is a way of life &mdash; deeply committed to every phase of the architectural process, from the first design concept to the moment a project is handed over to the client. He brings a comprehensive skill set across architectural design, interior design, and project management, with a particular passion for seeing built outcomes realised to their full potential. His proficiency in BIM workflows supports rigorous, well-coordinated documentation throughout design and construction. Equally skilled in 3D visualisation and miniature model-making, he communicates design ideas with precision and clarity at every stage. Kisia leads projects with purpose, ensuring continuity, quality, and client satisfaction from inception to completion.</p>
@@ -210,13 +320,188 @@
     </div>
   </section>
 
-  <footer>
-    <span>&copy; 2025 Plankraft International. All rights reserved.</span>
-    <span style="font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;">Nairobi, Kenya</span>
+  <section id="contact-us">
+    <div class="page-header">
+      <p class="eyebrow">Get In Touch</p>
+      <h2>Contact Us</h2>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-intro">
+        <p>Whether you are beginning a new project, seeking design consultation, or exploring collaboration, we would be glad to hear from you. Use the map below to locate our office and connect with us through phone, email, WhatsApp, or social platforms.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Location</span>
+              <span class="contact-value">Masta Villa Plaza, Highpoint, Juja, Kenya</span>
+            </li>
+            <li>
+              <span class="contact-label">Phone</span>
+              <span class="contact-value">
+                <a href="tel:+254708717207">0708717207</a> /
+                <a href="tel:+254759303710">0759303710</a>
+              </span>
+            </li>
+            <li>
+              <span class="contact-label">Email</span>
+              <span class="contact-value"><a href="mailto:plankraft.intl@gmail.com">plankraft.intl@gmail.com</a></span>
+            </li>
+            <li>
+              <span class="contact-label">Physical Address</span>
+              <span class="contact-value">Masta Villa Plaza, Highpoint, Juja.</span>
+            </li>
+            <li>
+              <span class="contact-label">WhatsApp</span>
+              <span class="contact-value">
+                <a href="https://wa.me/254708717207" target="_blank" rel="noopener noreferrer">0708717207</a> /
+                <a href="https://wa.me/254759303710" target="_blank" rel="noopener noreferrer">0759303710</a>
+              </span>
+            </li>
+          </ul>
+
+          <div class="directions-tools">
+            <label for="startPoint">Directions Start Point</label>
+            <div class="directions-row">
+              <input id="startPoint" class="directions-input" type="text" value="Nairobi CBD" placeholder="Enter your location">
+              <button id="updateDirections" class="mini-btn" type="button">Show Route</button>
+              <button id="useLocation" class="mini-btn" type="button">Use My Location</button>
+            </div>
+            <p class="directions-note" id="directionsNote">Distance and ETA are shown directly inside the map route view.</p>
+            <p class="directions-note"><a id="openDirections" href="https://www.google.com/maps/dir/?api=1&destination=Masta+Villa+Plaza,+Highpoint,+Juja,+Kenya" target="_blank" rel="noopener noreferrer">Open full directions in Google Maps</a></p>
+          </div>
+
+          <p class="social-title">Social Media</p>
+          <div class="social-links">
+            <a class="social-link tiktok" href="https://tiktok.com/@plankraft.intl" target="_blank" rel="noopener noreferrer" aria-label="Plankraft TikTok">
+              <svg class="social-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M12.5 1.5c.3 1.3 1.1 2.3 2.3 2.9v2.1c-1-.1-1.9-.5-2.7-1.1v4.2c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4c.3 0 .6 0 .8.1V8a2.1 2.1 0 0 0-.8-.2c-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8 1.8-.8 1.8-1.8V1.5h2.6z"/>
+              </svg>
+              <span>TikTok</span>
+            </a>
+            <a class="social-link instagram" href="https://www.instagram.com/plankraft.intl" target="_blank" rel="noopener noreferrer" aria-label="Plankraft Instagram">
+              <svg class="social-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 3.1c1.6 0 1.8 0 2.4.1.5 0 .8.1 1 .2.3.1.5.2.7.4.2.2.3.4.4.7.1.2.2.5.2 1 .1.6.1.8.1 2.4s0 1.8-.1 2.4c0 .5-.1.8-.2 1a1.9 1.9 0 0 1-1.1 1.1c-.2.1-.5.2-1 .2-.6.1-.8.1-2.4.1s-1.8 0-2.4-.1c-.5 0-.8-.1-1-.2a1.9 1.9 0 0 1-1.1-1.1c-.1-.2-.2-.5-.2-1C3.1 9.8 3.1 9.6 3.1 8s0-1.8.1-2.4c0-.5.1-.8.2-1 .1-.3.2-.5.4-.7.2-.2.4-.3.7-.4.2-.1.5-.2 1-.2.6-.1.8-.1 2.4-.1zM8 1.8c-1.6 0-1.8 0-2.5.1-.7 0-1.1.1-1.5.3a3.2 3.2 0 0 0-1.2.8 3.2 3.2 0 0 0-.8 1.2c-.2.4-.3.8-.3 1.5C1.8 6.2 1.8 6.4 1.8 8s0 1.8.1 2.5c0 .7.1 1.1.3 1.5.2.5.5.9.8 1.2.4.4.8.6 1.2.8.4.2.8.3 1.5.3.7.1.9.1 2.5.1s1.8 0 2.5-.1c.7 0 1.1-.1 1.5-.3.5-.2.9-.5 1.2-.8.4-.4.6-.8.8-1.2.2-.4.3-.8.3-1.5.1-.7.1-.9.1-2.5s0-1.8-.1-2.5c0-.7-.1-1.1-.3-1.5a3.2 3.2 0 0 0-.8-1.2 3.2 3.2 0 0 0-1.2-.8c-.4-.2-.8-.3-1.5-.3C9.8 1.8 9.6 1.8 8 1.8z"/>
+                <path d="M8 5.4A2.6 2.6 0 1 0 8 10.6 2.6 2.6 0 0 0 8 5.4zm0 4.1A1.5 1.5 0 1 1 8 6.5a1.5 1.5 0 0 1 0 3zM11 4.5a.6.6 0 1 0 0 1.2.6.6 0 0 0 0-1.2z"/>
+              </svg>
+              <span>Instagram</span>
+            </a>
+            <a class="social-link x" href="https://x.com/PlanKraft_Intl" target="_blank" rel="noopener noreferrer" aria-label="Plankraft on X">
+              <svg class="social-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M9.3 6.9 14.4 1h-1.2L8.8 6.1 5.3 1H1.1l5.4 7.7L1.1 15h1.2l4.7-5.4 3.8 5.4H15L9.3 6.9zM7.6 8.9l-.5-.7L2.9 2.1h1.9l3.4 4.9.5.7 4.4 6.2h-1.9L7.6 8.9z"/>
+              </svg>
+              <span>X</span>
+            </a>
+            <a class="social-link whatsapp" href="https://wa.me/254708717207" target="_blank" rel="noopener noreferrer" aria-label="Plankraft WhatsApp">
+              <svg class="social-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M13.6 2.4A7.4 7.4 0 0 0 1.7 11.1L.5 15.5l4.5-1.2a7.4 7.4 0 0 0 3.5.9h0a7.4 7.4 0 0 0 5.2-12.8zM8.5 14a6.2 6.2 0 0 1-3.2-.9l-.2-.1-2.7.7.7-2.6-.1-.2a6.1 6.1 0 1 1 5.5 3.1zm3.4-4.7c-.2-.1-1.1-.6-1.3-.7-.2-.1-.3-.1-.4.1s-.5.7-.6.8-.2.1-.4 0a5.1 5.1 0 0 1-2.5-2.2c-.1-.2 0-.3.1-.4l.3-.3.2-.3c.1-.1.1-.2 0-.4l-.6-1.5c-.1-.2-.2-.2-.4-.2h-.3c-.1 0-.3 0-.5.2-.2.2-.7.7-.7 1.6s.7 1.9.8 2c.1.1 1.3 2 3.2 2.8.5.2.8.3 1.1.4.5.2 1 .1 1.3.1.4-.1 1.1-.5 1.2-1 .2-.5.2-.9.1-1-.1-.1-.2-.1-.4-.2z"/>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="map-wrap" aria-label="Map location for Plankraft International">
+          <iframe
+            id="contactMap"
+            title="Plankraft International Location Map"
+            src="https://www.google.com/maps?output=embed&saddr=Nairobi+CBD&daddr=Masta+Villa+Plaza,+Highpoint,+Juja,+Kenya&dirflg=d"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <p class="footer-logo">Plankraft<span> International</span></p>
+        <p class="footer-copy">Designing architecture, interiors, and planning solutions with precision, character, and long-term value. We create spaces that work beautifully in daily life and endure over time.</p>
+      </div>
+
+      <div>
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-list">
+          <li><a href="#" onclick="showSection('home', document.querySelector('.nav-links a[onclick*=home]')); return false;">Home</a></li>
+          <li><a href="#" onclick="showSection('what-we-do', document.querySelector('.nav-links a[onclick*=what-we-do]')); return false;">What We Do</a></li>
+          <li><a href="#" onclick="showSection('who-we-are', document.querySelector('.nav-links a[onclick*=who-we-are]')); return false;">Who We Are</a></li>
+          <li><a href="#" onclick="showSection('contact-us', document.querySelector('.nav-links a[onclick*=contact-us]')); return false;">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-title">Reach Us</p>
+        <p class="footer-line">Masta Villa Plaza, Highpoint, Juja, Kenya</p>
+        <p class="footer-line"><a href="tel:+254708717207">0708717207</a> / <a href="tel:+254759303710">0759303710</a></p>
+        <p class="footer-line"><a href="mailto:plankraft.intl@gmail.com">plankraft.intl@gmail.com</a></p>
+        <p class="footer-line"><a href="https://www.instagram.com/plankraft.intl" target="_blank" rel="noopener noreferrer">Instagram</a> | <a href="https://x.com/PlanKraft_Intl" target="_blank" rel="noopener noreferrer">X</a> | <a href="https://tiktok.com/@plankraft.intl" target="_blank" rel="noopener noreferrer">TikTok</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; <span id="yearNow">2026</span> Plankraft International. All rights reserved.</span>
+      <div class="footer-mini-links">
+        <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">Back to top</a>
+        <span>Nairobi, Kenya</span>
+      </div>
+    </div>
   </footer>
 </div>
 
 <script>
+  const destinationAddress = 'Masta Villa Plaza, Highpoint, Juja, Kenya';
+
+  function buildDirectionsEmbed(origin) {
+    return 'https://www.google.com/maps?output=embed&saddr=' + encodeURIComponent(origin) + '&daddr=' + encodeURIComponent(destinationAddress) + '&dirflg=d';
+  }
+
+  function updateDirections(origin) {
+    const map = document.getElementById('contactMap');
+    const note = document.getElementById('directionsNote');
+    const link = document.getElementById('openDirections');
+    if (!map || !note || !link) return;
+
+    map.src = buildDirectionsEmbed(origin);
+    link.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destinationAddress) + '&travelmode=driving';
+    note.textContent = 'Showing driving directions from ' + origin + '. Google Maps displays exact distance and ETA in the route panel.';
+  }
+
+  function connectDirectionsControls() {
+    const startPoint = document.getElementById('startPoint');
+    const updateBtn = document.getElementById('updateDirections');
+    const locationBtn = document.getElementById('useLocation');
+    const note = document.getElementById('directionsNote');
+
+    if (!startPoint || !updateBtn || !locationBtn || !note) return;
+
+    updateBtn.addEventListener('click', function () {
+      const origin = (startPoint.value || '').trim();
+      if (!origin) {
+        note.textContent = 'Please enter a start point to calculate route distance and ETA.';
+        return;
+      }
+      updateDirections(origin);
+    });
+
+    locationBtn.addEventListener('click', function () {
+      if (!navigator.geolocation) {
+        note.textContent = 'Geolocation is not available in this browser. Enter your location manually.';
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const origin = position.coords.latitude + ',' + position.coords.longitude;
+        startPoint.value = origin;
+        updateDirections(origin);
+      }, function () {
+        note.textContent = 'Could not read current location. Please allow location access or type your start point.';
+      });
+    });
+  }
+
   function showSection(id, el) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -224,4 +509,7 @@
     if (el) el.classList.add('active');
     window.scrollTo(0, 0);
   }
+
+  document.getElementById('yearNow').textContent = new Date().getFullYear();
+  connectDirectionsControls();
 </script>
