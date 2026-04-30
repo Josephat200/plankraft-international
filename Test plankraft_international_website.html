@@ -1,0 +1,227 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --stone: #2C2A26;
+    --warm: #B4864A;
+    --cream: #F5F2EE;
+    --mid: #7A7570;
+  }
+
+  .pk-site { font-family: 'DM Sans', sans-serif; color: var(--stone); background: #fff; line-height: 1.7; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 3rem; border-bottom: 0.5px solid rgba(44,42,38,0.15);
+    position: sticky; top: 0; background: #fff; z-index: 100;
+  }
+
+  .logo { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.1rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); }
+  .logo span { color: var(--warm); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); text-decoration: none; font-weight: 400; transition: color 0.2s; cursor: pointer; }
+  .nav-links a:hover, .nav-links a.active { color: var(--stone); }
+
+  section { display: none; }
+  section.active { display: block; }
+
+  .hero { min-height: 82vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 4rem 3rem; background: var(--cream); position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(180,134,74,0.08) 0%, transparent 60%), repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(44,42,38,0.025) 40px, rgba(44,42,38,0.025) 41px); }
+  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); margin-bottom: 1.5rem; font-weight: 500; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; color: var(--stone); max-width: 680px; margin-bottom: 2rem; }
+  .hero h1 em { font-style: italic; color: var(--warm); }
+  .hero-sub { font-size: 0.95rem; color: var(--mid); max-width: 420px; line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300; }
+  .hero-divider { width: 48px; height: 1px; background: var(--warm); margin-bottom: 1.5rem; }
+
+  .btn { display: inline-block; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); border: 0.5px solid var(--stone); padding: 0.85rem 2rem; cursor: pointer; transition: background 0.2s, color 0.2s; text-decoration: none; font-weight: 400; }
+  .btn:hover { background: var(--stone); color: #fff; }
+
+  .page-header { padding: 5rem 3rem 3rem; border-bottom: 0.5px solid rgba(44,42,38,0.1); background: var(--cream); }
+  .page-header .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); margin-bottom: 1rem; font-weight: 500; }
+  .page-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2rem, 4vw, 3rem); color: var(--stone); line-height: 1.15; }
+
+  .section-body { padding: 4rem 3rem; }
+  .services-intro { max-width: 640px; margin-bottom: 4rem; }
+  .services-intro p { font-size: 1rem; color: var(--mid); line-height: 1.9; font-weight: 300; }
+  .services-intro p + p { margin-top: 1.2rem; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; border: 0.5px solid rgba(44,42,38,0.12); }
+  .service-item { padding: 2.5rem 2rem; border-right: 0.5px solid rgba(44,42,38,0.12); border-bottom: 0.5px solid rgba(44,42,38,0.12); transition: background 0.2s; }
+  .service-item:hover { background: var(--cream); }
+  .service-num { font-size: 0.68rem; letter-spacing: 0.15em; color: var(--warm); font-weight: 500; margin-bottom: 1rem; display: block; }
+  .service-title { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.25rem; color: var(--stone); margin-bottom: 0.75rem; line-height: 1.25; }
+  .service-desc { font-size: 0.83rem; color: var(--mid); line-height: 1.75; font-weight: 300; }
+
+  .about-section { padding: 4rem 3rem; }
+  .about-intro { max-width: 640px; margin-bottom: 5rem; }
+  .about-intro p { font-size: 1rem; color: var(--mid); line-height: 1.9; font-weight: 300; }
+  .about-intro p + p { margin-top: 1.2rem; }
+
+  .team-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem; }
+  .team-label::after { content: ''; flex: 1; height: 0.5px; background: rgba(44,42,38,0.15); }
+
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
+  .team-card { border-top: 1px solid var(--warm); padding-top: 2rem; }
+
+  .team-initials { width: 56px; height: 56px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: var(--warm); border: 0.5px solid rgba(180,134,74,0.3); margin-bottom: 1.25rem; }
+  .team-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.35rem; color: var(--stone); margin-bottom: 0.2rem; }
+  .team-role { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); font-weight: 500; margin-bottom: 1.25rem; }
+  .team-bio { font-size: 0.88rem; color: var(--mid); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
+
+  .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag { font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.3rem 0.75rem; border: 0.5px solid rgba(44,42,38,0.2); color: var(--stone); text-transform: uppercase; font-weight: 400; }
+
+  .hero-stats { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 3rem; border-top: 0.5px solid rgba(44,42,38,0.12); }
+  .stat-item .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--stone); line-height: 1; }
+  .stat-item .stat-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-top: 0.3rem; font-weight: 400; }
+
+  .philosophy-strip { padding: 4rem 3rem; background: var(--stone); color: #fff; }
+  .philosophy-strip blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; font-style: italic; line-height: 1.5; max-width: 700px; color: rgba(255,255,255,0.9); }
+  .philosophy-strip cite { display: block; margin-top: 1.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm); font-style: normal; font-weight: 500; }
+
+  footer { padding: 2.5rem 3rem; border-top: 0.5px solid rgba(44,42,38,0.12); display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--mid); font-weight: 300; }
+</style>
+
+<div class="pk-site">
+  <nav>
+    <div class="logo">Plankraft<span> International</span></div>
+    <ul class="nav-links">
+      <li><a href="#" class="active" onclick="showSection('home', this); return false;">Home</a></li>
+      <li><a href="#" onclick="showSection('what-we-do', this); return false;">What We Do</a></li>
+      <li><a href="#" onclick="showSection('who-we-are', this); return false;">Who We Are</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="active">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div style="position: relative;">
+        <p class="hero-eyebrow">Nairobi, Kenya &mdash; Architecture &amp; Design</p>
+        <h1>Spaces that <em>endure.</em><br>Design that matters.</h1>
+        <div class="hero-divider"></div>
+        <p class="hero-sub">Plankraft International is a multidisciplinary design practice committed to crafting purposeful, lasting environments &mdash; where architecture meets intention.</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a class="btn" onclick="showSection('what-we-do', document.querySelector('[onclick*=what-we-do]')); return false;">Our Services</a>
+          <a class="btn" onclick="showSection('who-we-are', document.querySelector('[onclick*=who-we-are]')); return false;">Meet the Team</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Core Disciplines</div></div>
+          <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Lead Architects</div></div>
+          <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Commitment to craft</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="philosophy-strip">
+      <blockquote>"We believe architecture is not merely the act of building &mdash; it is the art of shaping life. Every line drawn is a commitment to the people who will inhabit the space."</blockquote>
+      <cite>Plankraft International &mdash; Design Philosophy</cite>
+    </div>
+  </section>
+
+  <section id="what-we-do">
+    <div class="page-header">
+      <p class="eyebrow">Our Practice</p>
+      <h2>What We Do</h2>
+    </div>
+    <div class="section-body">
+      <div class="services-intro">
+        <p>At Plankraft International, we are a studio defined by the full spectrum of the built environment. Our work begins where ideas are born and carries through to the final detail on-site &mdash; a seamless continuum of design thinking and technical precision.</p>
+        <p>We bring together architecture, interiors, urban strategy, project management, and environmental responsibility under one roof. Each discipline informs the other, ensuring that every project we deliver is coherent, considered, and enduring.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <span class="service-num">01</span>
+          <div class="service-title">Architectural Design</div>
+          <p class="service-desc">From the first sketch to construction documentation, we craft buildings that are functional, contextual, and unmistakably purposeful. Our architectural process is driven by a deep understanding of programme, place, and the people who will inhabit each space &mdash; balancing aesthetic ambition with technical rigour at every stage.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">02</span>
+          <div class="service-title">Interior Design</div>
+          <p class="service-desc">We shape the experience within. Our interior design work spans commercial, hospitality, and bespoke residential environments &mdash; each one conceived with a singular attention to material, light, and human scale. We treat every interior as a complete composition, where form and feeling are inseparable.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">03</span>
+          <div class="service-title">Masterplanning</div>
+          <p class="service-desc">Great places begin with great planning. We approach masterplanning as a discipline of vision &mdash; organising land, movement, and activity into frameworks that communities can grow within. Our plans are strategic and adaptive, designed to remain relevant as the needs of users and cities evolve over time.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">04</span>
+          <div class="service-title">Project Management</div>
+          <p class="service-desc">Exceptional design deserves exceptional delivery. Our project management service bridges the gap between design intent and built reality &mdash; coordinating consultants, contractors, and timelines with clarity and discipline. We manage scope, cost, and programme across all project phases, ensuring that every commitment made at the design stage is honoured on the ground.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-num">05</span>
+          <div class="service-title">Green Buildings</div>
+          <p class="service-desc">Sustainability is not an afterthought in our practice &mdash; it is embedded in how we think from day one. We design buildings that are energy-conscious, climate-responsive, and built to last. By integrating passive design strategies, responsible material selection, and emerging green technologies, we create spaces that are good for people and for the planet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who-we-are">
+    <div class="page-header">
+      <p class="eyebrow">The Practice</p>
+      <h2>Who We Are</h2>
+    </div>
+    <div class="about-section">
+      <div class="about-intro">
+        <p>Plankraft International is a design practice founded on the conviction that architecture is one of the most consequential acts of human creativity. We are a lean, focused studio &mdash; built on talent, not scale &mdash; where each project receives the full weight of our collective expertise and personal investment.</p>
+        <p>We operate at the intersection of design rigour and practical delivery, bridging the conceptual and the constructed with equal fluency. Our team brings diverse strengths to every commission: from the precision of BIM workflows to the tactile craft of physical model-making, from the sweep of strategic planning to the discipline of on-site execution.</p>
+        <p>We believe the best architecture emerges from curiosity, collaboration, and an uncompromising commitment to craft &mdash; and we bring all three to every project we touch.</p>
+      </div>
+
+      <div class="team-label">Our Architects</div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-initials">MCM</div>
+          <div class="team-name">Mwita Christopher Mangiti</div>
+          <div class="team-role">Architect</div>
+          <p class="team-bio">Mwita is an architect with a broad design range spanning commercial and hospitality projects, with a strong command of both architecture and interior design. He approaches every project holistically &mdash; from initial concept and spatial planning through to detailed design, documentation, and construction. His fluency in BIM workflows ensures precision and coordination at every stage of the process. On-site, he applies the same rigour to supervision, ensuring design intent is preserved through to completion. Skilled in 3D visualisation and miniature model-making, he brings ideas to life early, giving clients a clear and confident picture of the finished project. He takes each commission from brief to handover, managing the full journey with clarity and care.</p>
+          <div class="skills-list">
+            <span class="skill-tag">Architectural Design</span>
+            <span class="skill-tag">Interior Design</span>
+            <span class="skill-tag">BIM Workflows</span>
+            <span class="skill-tag">Site Supervision</span>
+            <span class="skill-tag">Project Management</span>
+            <span class="skill-tag">3D Visualisation</span>
+            <span class="skill-tag">Miniature Models</span>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-initials">KKJ</div>
+          <div class="team-name">Kisia Kibiyi Julius</div>
+          <div class="team-role">Architect</div>
+          <p class="team-bio">Kisia is an architect for whom the discipline is a way of life &mdash; deeply committed to every phase of the architectural process, from the first design concept to the moment a project is handed over to the client. He brings a comprehensive skill set across architectural design, interior design, and project management, with a particular passion for seeing built outcomes realised to their full potential. His proficiency in BIM workflows supports rigorous, well-coordinated documentation throughout design and construction. Equally skilled in 3D visualisation and miniature model-making, he communicates design ideas with precision and clarity at every stage. Kisia leads projects with purpose, ensuring continuity, quality, and client satisfaction from inception to completion.</p>
+          <div class="skills-list">
+            <span class="skill-tag">Architectural Design</span>
+            <span class="skill-tag">Interior Design</span>
+            <span class="skill-tag">BIM Workflows</span>
+            <span class="skill-tag">Project Management</span>
+            <span class="skill-tag">3D Visualisation</span>
+            <span class="skill-tag">Miniature Models</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; 2025 Plankraft International. All rights reserved.</span>
+    <span style="font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;">Nairobi, Kenya</span>
+  </footer>
+</div>
+
+<script>
+  function showSection(id, el) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (el) el.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
