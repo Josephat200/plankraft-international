@@ -542,6 +542,135 @@
     background: linear-gradient(180deg, rgba(159,175,145,0.08) 0%, var(--paper) 100%);
   }
 
+  /* === Inspirations Gallery === */
+  .gallery-section {
+    margin-top: clamp(4rem, 7vw, 6rem);
+    padding-top: clamp(3rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+  .gallery-intro {
+    max-width: 760px;
+    margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
+    text-align: center;
+  }
+  .gallery-intro .eyebrow {
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .gallery-intro h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--stone);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .gallery-intro h3 em {
+    font-style: italic;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--warm);
+  }
+  .gallery-intro p {
+    font-size: 0.95rem;
+    color: var(--mid);
+    line-height: 1.85;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: clamp(1.25rem, 2.2vw, 1.75rem);
+  }
+  .gallery-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--t), box-shadow var(--t);
+    display: flex;
+    flex-direction: column;
+  }
+  .gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .gallery-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--cream-warm);
+  }
+  .gallery-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s var(--ease-out), filter 0.5s var(--ease);
+  }
+  .gallery-card:hover .gallery-media img {
+    transform: scale(1.06);
+  }
+  .gallery-media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(20,18,15,0.55) 100%);
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .gallery-tag {
+    position: absolute; top: 0.85rem; left: 0.85rem;
+    z-index: 2;
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 600; color: #fff;
+    background: rgba(20,18,15,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 0.4rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 2px;
+  }
+  .gallery-tag.green { background: rgba(107,124,94,0.85); }
+  .gallery-tag.gold  { background: rgba(185,138,79,0.92); }
+  .gallery-body {
+    padding: 1.4rem 1.5rem 1.6rem;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
+  .gallery-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: var(--stone);
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.005em;
+  }
+  .gallery-meta {
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--warm-deep);
+    font-weight: 600;
+    margin-bottom: 0.85rem;
+    display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;
+  }
+  .gallery-meta .dot {
+    width: 3px; height: 3px; border-radius: 50%; background: var(--warm); opacity: 0.6;
+    display: inline-block;
+  }
+  .gallery-desc {
+    font-size: 0.85rem; color: var(--mid);
+    line-height: 1.75; font-weight: 300;
+    margin: 0;
+  }
+
+  @media (max-width: 560px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+
   /* === About === */
   .about-section {
     padding: clamp(3rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 3rem);
@@ -1068,6 +1197,162 @@
           <span class="service-num">05</span>
           <div class="service-title">Green Buildings</div>
           <p class="service-desc">Sustainability is not an afterthought in our practice &mdash; it is embedded in how we think from day one. We design buildings that are energy-conscious, climate-responsive, and built to last. By integrating passive design strategies, responsible material selection, and emerging green technologies, we create spaces that are good for people and for the planet.</p>
+        </div>
+      </div>
+
+      <div class="gallery-section" id="inspirations">
+        <div class="gallery-intro">
+          <p class="eyebrow">Inspirations &amp; References</p>
+          <h3>Architecture that <em>moves us.</em></h3>
+          <p>A curated selection of celebrated buildings from around the world. These are not our projects &mdash; they are the works that inform our thinking, sharpen our craft, and remind us what architecture can be when vision, structure, and place come together.</p>
+        </div>
+
+        <div class="gallery-grid">
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Cultural</span>
+              <img src="gallery/01-sydney-opera-house.jpg" alt="Sydney Opera House on the harbour" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Sydney Opera House</div>
+              <div class="gallery-meta"><span>J&oslash;rn Utzon &middot; 1973</span><span class="dot"></span><span>Sydney, Australia</span></div>
+              <p class="gallery-desc">A radical leap in shell-vault engineering. Pre-cast concrete sails clad in over a million tiles rise from a granite podium &mdash; a UNESCO landmark that turned a competition entry into a national symbol.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag green">Residential</span>
+              <img src="gallery/02-fallingwater.jpg" alt="Fallingwater cantilevered above Bear Run stream" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Fallingwater</div>
+              <div class="gallery-meta"><span>Frank Lloyd Wright &middot; 1939</span><span class="dot"></span><span>Mill Run, Pennsylvania</span></div>
+              <p class="gallery-desc">A private home cantilevered directly over a waterfall. Built of local sandstone and reinforced concrete, it remains the defining example of organic architecture &mdash; a building in conversation with its landscape.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag gold">High-Rise</span>
+              <img src="gallery/03-burj-khalifa.jpg" alt="Burj Khalifa tower against the Dubai sky" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Burj Khalifa</div>
+              <div class="gallery-meta"><span>SOM &middot; Adrian Smith &middot; 2010</span><span class="dot"></span><span>Dubai, UAE</span></div>
+              <p class="gallery-desc">At 828&nbsp;metres, the world&rsquo;s tallest structure. A buttressed-core system inspired by the Hymenocallis flower allows the tower to step gracefully toward the sky while resisting desert wind loads.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Cultural</span>
+              <img src="gallery/04-guggenheim-bilbao.jpg" alt="Guggenheim Museum Bilbao titanium curves" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Guggenheim Museum Bilbao</div>
+              <div class="gallery-meta"><span>Frank Gehry &middot; 1997</span><span class="dot"></span><span>Bilbao, Spain</span></div>
+              <p class="gallery-desc">Sculpted titanium volumes catch the river light along the Nervi&oacute;n. Designed using aerospace CAD software, it sparked the &ldquo;Bilbao effect&rdquo; &mdash; the idea that great architecture can transform a city&rsquo;s economy.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag gold">Mixed-Use</span>
+              <img src="gallery/05-the-shard.jpg" alt="The Shard tower in London" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">The Shard</div>
+              <div class="gallery-meta"><span>Renzo Piano &middot; 2012</span><span class="dot"></span><span>London, United Kingdom</span></div>
+              <p class="gallery-desc">A tapered, 310-metre glass spire above London Bridge Station. Eight inclined facets refract the sky differently throughout the day, a vertical city of offices, hotel, residences, and public viewing decks.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Cultural</span>
+              <img src="gallery/06-heydar-aliyev.jpg" alt="Heydar Aliyev Center under construction" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Heydar Aliyev Center</div>
+              <div class="gallery-meta"><span>Zaha Hadid Architects &middot; 2012</span><span class="dot"></span><span>Baku, Azerbaijan</span></div>
+              <p class="gallery-desc">A continuous, fluid surface that folds the plaza, walls, and roof into a single gesture. Engineered with a space-frame structure clad in fibre-reinforced polymer, it is a manifesto for parametric design.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag gold">Hospitality</span>
+              <img src="gallery/07-marina-bay-sands.jpg" alt="Marina Bay Sands three towers and SkyPark" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Marina Bay Sands</div>
+              <div class="gallery-meta"><span>Moshe Safdie &middot; 2010</span><span class="dot"></span><span>Singapore</span></div>
+              <p class="gallery-desc">Three 55-storey hotel towers crowned by a 340-metre cantilevered SkyPark with infinity pool, observation deck, and gardens. A feat of structural choreography that reshaped Singapore&rsquo;s skyline.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag green">Residential</span>
+              <img src="gallery/08-villa-savoye.jpg" alt="Villa Savoye white modernist house" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Villa Savoye</div>
+              <div class="gallery-meta"><span>Le Corbusier &middot; 1931</span><span class="dot"></span><span>Poissy, France</span></div>
+              <p class="gallery-desc">The clearest demonstration of Le Corbusier&rsquo;s &ldquo;Five Points&rdquo;: pilotis, free plan, free fa&ccedil;ade, ribbon windows, and roof garden. A small white box that quietly rewrote the rules of the modern house.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Civic</span>
+              <img src="gallery/09-lotus-temple.jpg" alt="Lotus Temple petals at sunset, New Delhi" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Lotus Temple</div>
+              <div class="gallery-meta"><span>Fariborz Sahba &middot; 1986</span><span class="dot"></span><span>New Delhi, India</span></div>
+              <p class="gallery-desc">Twenty-seven free-standing marble &ldquo;petals&rdquo; arranged in three layers around a central hall. A Bah&aacute;&rsquo;&iacute; House of Worship open to all faiths, and one of the most visited buildings in the world.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag green">Housing</span>
+              <img src="gallery/10-habitat-67.jpg" alt="Habitat 67 modular concrete housing in Montreal" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Habitat 67</div>
+              <div class="gallery-meta"><span>Moshe Safdie &middot; 1967</span><span class="dot"></span><span>Montreal, Canada</span></div>
+              <p class="gallery-desc">354 prefabricated concrete modules stacked into 146 homes, each with its own roof garden and light on multiple sides. A pioneering experiment in dense, humane urban housing.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Civic</span>
+              <img src="gallery/11-sagrada-familia.jpg" alt="Sagrada Fam&iacute;lia fa&ccedil;ade in Barcelona" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Sagrada Fam&iacute;lia</div>
+              <div class="gallery-meta"><span>Antoni Gaud&iacute; &middot; from 1882</span><span class="dot"></span><span>Barcelona, Spain</span></div>
+              <p class="gallery-desc">Gaud&iacute;&rsquo;s lifelong basilica, a fusion of Gothic structure and natural geometry &mdash; hyperboloid vaults, branching columns, and light-filled towers. Construction continues over 140 years on, guided by his original models.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Sport</span>
+              <img src="gallery/12-birds-nest.jpg" alt="Beijing National Stadium Bird's Nest" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Beijing National Stadium</div>
+              <div class="gallery-meta"><span>Herzog &amp; de Meuron &middot; Ai Weiwei &middot; 2008</span><span class="dot"></span><span>Beijing, China</span></div>
+              <p class="gallery-desc">Built for the 2008 Olympics, the &ldquo;Bird&rsquo;s Nest&rdquo; weaves an exposed steel lattice around a 91,000-seat bowl &mdash; structure as ornament, ornament as structure.</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </div>
