@@ -7,43 +7,54 @@ A static one-page website for Plankraft International, a Nairobi-based architect
 ```
 .
 ├── public/                          # Web root served at port 5000
-│   ├── index.html                   # The site (was "Test plankraft_international_website.html")
-│   ├── KISIA PIC.jpg.jpeg           # Team photo
-│   ├── MWITA PIC.png                # Team photo
-│   └── gallery/                     # 12 architectural inspiration photos shown on "What We Do"
-│       ├── 01-sydney-opera-house.jpg
-│       ├── 02-fallingwater.jpg
-│       ├── 03-burj-khalifa.jpg
-│       ├── 04-guggenheim-bilbao.jpg
-│       ├── 05-the-shard.jpg
-│       ├── 06-heydar-aliyev.jpg
-│       ├── 07-marina-bay-sands.jpg
-│       ├── 08-villa-savoye.jpg
-│       ├── 09-lotus-temple.jpg
-│       ├── 10-habitat-67.jpg
-│       ├── 11-sagrada-familia.jpg
-│       └── 12-birds-nest.jpg
-├── server.py                        # Tiny Python static file server
-├── Test plankraft_international_website.html  # Original source HTML (kept for reference)
-├── KISIA PIC.jpg.jpeg               # Original asset (kept for reference)
-└── MWITA PIC.png                    # Original asset (kept for reference)
+│   ├── index.html                   # The entire site (HTML + CSS + JS, single file)
+│   ├── KISIA PIC.jpg.jpeg           # Team photo — Kisia Kibiyi Julius
+│   ├── MWITA PIC.png                # Team photo — Mwita Christopher Mangiti
+│   └── gallery/                     # 16 Kenya architecture photos on "What We Do"
+│       ├── ke-01-kicc.jpg           # Kenyatta International Conference Centre
+│       ├── ke-02-nairobi-skyline.jpg# Nairobi Upperhill skyline
+│       ├── ke-03-nairobi-museum.jpg # Nairobi National Museum
+│       ├── ke-04-fort-jesus.jpg     # Fort Jesus, Mombasa
+│       ├── ke-05-lamu.jpg           # Lamu Old Town
+│       ├── ke-06-nairobi-modern.jpg # Two Rivers Mall
+│       ├── ke-07-kenya-resort.jpg   # Angama Mara eco-lodge, Maasai Mara
+│       ├── ke-08-africa-modern.jpg  # Aga Khan Academy, Nairobi
+│       ├── ke-09-nairobi-office.jpg # Westlands commercial hub
+│       ├── ke-10-africa-villa.jpg   # Karen residential villas
+│       ├── ke-11-kenya-interior.jpg # Kenyan contemporary interiors
+│       ├── ke-12-kenya-green.jpg    # Nairobi green building standard
+│       ├── ke-13-nairobi-road.jpg   # Nairobi Expressway
+│       ├── ke-14-africa-archi.jpg   # Bomas of Kenya
+│       ├── ke-15-safari-lodge.jpg   # Rift Valley tented lodges
+│       └── ke-16-kenya-home.jpg     # Kenya affordable housing programme
+├── server.py                        # Python static file server with gzip + smart caching
+└── Test plankraft_international_website.html  # Original source HTML (kept for reference)
 ```
 
 ## How It Runs
 
-A small Python `http.server` (`server.py`) serves the `public/` directory on `0.0.0.0:5000` with cache-disabling headers so the Replit preview iframe always shows fresh content.
+`server.py` serves the `public/` directory on `0.0.0.0:5000` with:
+- **Gzip compression** for HTML/CSS/JS files (significant speed improvement)
+- **Long-term caching** for images/assets (30-day max-age)
+- **No-cache** for HTML so the preview always shows fresh content
+- Server request logs suppressed for cleaner output
 
 The single workflow `Start application` runs `python3 server.py` on port 5000.
 
 ## Local Editing
 
-Edit `public/index.html` directly. The server has no build step; just refresh the preview to see changes.
+Edit `public/index.html` directly. No build step — just refresh the preview.
 
 ## Site Features
 
-- **Four sections** (Home, What We Do, Who We Are, Contact Us) shown via JS `showSection()` switching, with hash-based deep links (`#home`, `#what-we-do`, `#who-we-are`, `#contact-us`).
-- **Inspirations gallery** on the "What We Do" page: 12 cards of celebrated buildings from around the world (architect, year, location, short note), clearly framed as inspirations &mdash; not Plankraft projects. Images are stored locally in `public/gallery/` so the page never depends on third-party hosts staying up.
-- **Navigation:** sticky frosted nav bar with scroll shadow, a prominent gold-gradient "Get In Touch" CTA, an animated gradient underline indicator for the active page, and a hamburger drawer on screens ≤ 900px (slide-in from the right with backdrop, ESC/backdrop close, body scroll lock).
-- **Scroll affordances:** thin gold-gradient scroll progress bar at the very top of the page, and a circular "Top" floating button that fades in after the user scrolls ~420px.
-- **Color system:** CSS custom properties on `:root` define the palette and gradients (`--warm`, `--warm-deep`, `--stone`, `--sage`, `--clay`, `--cream`, `--cream-warm`, `--paper`, plus `--gradient-warm`, `--gradient-text`, `--gradient-stone-rich`, `--gradient-hero`, and warm/glow shadow tokens). Service cards use the warm gradient on hover, the "Green Buildings" card uses a sage tint, social links light up in their brand colors (TikTok, Instagram, X, WhatsApp).
-- **Accessibility:** `prefers-reduced-motion` short-circuits animations and smooth scroll; the hamburger has proper `aria-expanded` / `aria-controls` and ESC key support.
+- **Four sections** (Home, What We Do, Who We Are, Contact Us) shown via JS `showSection()` switching, with hash-based deep links.
+- **Kenya architecture gallery** on the "What We Do" page: 16 cards of celebrated Kenyan buildings — from KICC and Fort Jesus to Lamu Old Town, safari eco-lodges, and Nairobi's green buildings. All content, images, and descriptions are Kenya-specific.
+- **Scroll-reveal animations** via IntersectionObserver: gallery cards fade+slide in as user scrolls, staggered by column position.
+- **Floating ambient orbs** on the hero: three blurred radial-gradient circles that drift with CSS keyframe animation and follow mouse movement with parallax.
+- **Animated stat counters** on the hero: numbers count up from zero when they scroll into view.
+- **Service items animation** on "What We Do": cards animate in with staggered CSS keyframes when the section is activated.
+- **Navigation:** sticky frosted nav bar with scroll shadow + gold glow, animated gradient underline for active page, hamburger drawer on ≤ 900px.
+- **Scroll affordances:** gold-gradient progress bar, floating "Top" button, smooth section transitions.
+- **Color system:** CSS custom properties (`--warm`, `--stone`, `--sage`, `--clay`, `--cream`, `--paper`, gradients and shadow tokens). Service cards use warm gradient on hover, "Green Buildings" card uses sage tint.
+- **Accessibility:** `prefers-reduced-motion` disables animations; hamburger has `aria-expanded`/`aria-controls`; ESC key closes mobile nav.
+- **Performance:** gzip compression server-side, images lazy-loaded, image caching headers, GPU-composited transforms for animations.

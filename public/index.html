@@ -1117,6 +1117,230 @@
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     html { scroll-behavior: auto; }
   }
+
+  /* === Enhanced Scroll-Reveal === */
+  .reveal-card {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+  .reveal-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+  }
+  .reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-28px);
+    transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+  }
+  .reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(28px);
+    transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+  }
+  .reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* === Floating ambient orbs === */
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    filter: blur(60px);
+    animation: orbDrift 12s ease-in-out infinite;
+  }
+  .hero-orb:nth-child(1) {
+    width: 340px; height: 340px;
+    background: radial-gradient(circle, rgba(185,138,79,0.28) 0%, transparent 70%);
+    top: 8%; right: 10%;
+    animation-duration: 14s;
+  }
+  .hero-orb:nth-child(2) {
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(107,124,94,0.2) 0%, transparent 70%);
+    bottom: 15%; right: 25%;
+    animation-duration: 18s;
+    animation-delay: -5s;
+  }
+  .hero-orb:nth-child(3) {
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(184,98,74,0.14) 0%, transparent 70%);
+    top: 45%; left: 5%;
+    animation-duration: 22s;
+    animation-delay: -9s;
+  }
+  @keyframes orbDrift {
+    0%   { transform: translateY(0) translateX(0) scale(1); }
+    33%  { transform: translateY(-22px) translateX(14px) scale(1.06); }
+    66%  { transform: translateY(12px) translateX(-18px) scale(0.96); }
+    100% { transform: translateY(0) translateX(0) scale(1); }
+  }
+
+  /* === Gallery card enhanced hover === */
+  .gallery-card {
+    cursor: pointer;
+  }
+  .gallery-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(185,138,79,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--t);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gallery-card:hover::after { opacity: 1; }
+
+  .gallery-tag { transition: transform var(--t), background var(--t); }
+  .gallery-card:hover .gallery-tag { transform: translateY(-2px); }
+
+  /* === Pulsing gold dot accent === */
+  @keyframes pulseDot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(185,138,79,0.5); }
+    50%       { box-shadow: 0 0 0 6px rgba(185,138,79,0); }
+  }
+  .hero-eyebrow::before {
+    animation: pulseDot 2.5s ease-in-out infinite;
+  }
+
+  /* === Service items animated on section enter === */
+  #what-we-do.active .service-item {
+    animation: serviceReveal 0.6s var(--ease-out) backwards;
+  }
+  #what-we-do.active .service-item:nth-child(1) { animation-delay: 0.05s; }
+  #what-we-do.active .service-item:nth-child(2) { animation-delay: 0.13s; }
+  #what-we-do.active .service-item:nth-child(3) { animation-delay: 0.21s; }
+  #what-we-do.active .service-item:nth-child(4) { animation-delay: 0.29s; }
+  #what-we-do.active .service-item:nth-child(5) { animation-delay: 0.37s; }
+  @keyframes serviceReveal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === Philosophy strip enhanced === */
+  .philosophy-strip {
+    position: relative;
+    overflow: hidden;
+  }
+  .philosophy-strip::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    animation: stripShine 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes stripShine {
+    0%   { left: -100%; }
+    60%, 100% { left: 160%; }
+  }
+
+  /* === Team card enhanced === */
+  .team-card {
+    transition: transform var(--t), box-shadow var(--t);
+  }
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* === Skill tags subtle float === */
+  .skill-tag {
+    transition: transform var(--t-fast), background var(--t-fast), color var(--t-fast);
+  }
+  .skill-tag:hover {
+    transform: translateY(-2px);
+    background: var(--warm);
+    color: #fff;
+  }
+
+  /* === Page header parallax layer === */
+  .page-header {
+    isolation: isolate;
+  }
+  .page-header-parallax {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 90% 10%, rgba(185,138,79,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at 5% 95%, rgba(107,124,94,0.10) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
+
+  /* === Scrollbar enhancement === */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: var(--warm-deep);
+    border: 2px solid var(--cream);
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--cream-warm);
+  }
+
+  /* === Counter number style === */
+  .stat-num {
+    transition: transform 0.3s var(--ease);
+  }
+  .stat-item:hover .stat-num {
+    transform: scale(1.05);
+  }
+
+  /* === Gallery grid 4-col on large screens === */
+  @media (min-width: 1200px) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* === Nav glow on scroll === */
+  nav.scrolled {
+    box-shadow: 0 4px 30px rgba(185,138,79,0.08), 0 2px 10px rgba(44,42,38,0.06);
+  }
+
+  /* === Floating label on gallery image overlay === */
+  .gallery-media .gallery-overlay-label {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    z-index: 2;
+    color: #fff;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--t), transform var(--t);
+    pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .gallery-card:hover .gallery-overlay-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
 
 <div class="pk-site">
@@ -1140,6 +1364,9 @@
   <section id="home" class="active">
     <div class="hero">
       <div class="hero-bg"></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
       <div style="position: relative;">
         <p class="hero-eyebrow">Nairobi, Kenya &mdash; Architecture &amp; Design</p>
         <h1>Spaces that <em>endure.</em><br>Design that matters.</h1>
@@ -1202,154 +1429,202 @@
 
       <div class="gallery-section" id="inspirations">
         <div class="gallery-intro">
-          <p class="eyebrow">Inspirations &amp; References</p>
-          <h3>Architecture that <em>moves us.</em></h3>
-          <p>A curated selection of celebrated buildings from around the world. These are not our projects &mdash; they are the works that inform our thinking, sharpen our craft, and remind us what architecture can be when vision, structure, and place come together.</p>
+          <p class="eyebrow">Built in Kenya &mdash; For Kenya</p>
+          <h3>Architecture that <em>shapes us.</em></h3>
+          <p>A curated celebration of Kenya&rsquo;s architectural identity &mdash; from Nairobi&rsquo;s evolving skyline and the ancient coral towns of the Coast, to the award-winning eco-lodges of the Rift Valley and Maasai Mara. These landmarks inspire our work and deepen our commitment to design rooted in Kenyan place, climate, and culture.</p>
         </div>
 
         <div class="gallery-grid">
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
-              <span class="gallery-tag">Cultural</span>
-              <img src="gallery/01-sydney-opera-house.jpg" alt="Sydney Opera House on the harbour" loading="lazy">
+              <span class="gallery-tag gold">Civic</span>
+              <img src="gallery/ke-01-kicc.jpg" alt="Kenyatta International Conference Centre Nairobi" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Sydney Opera House</div>
-              <div class="gallery-meta"><span>J&oslash;rn Utzon &middot; 1973</span><span class="dot"></span><span>Sydney, Australia</span></div>
-              <p class="gallery-desc">A radical leap in shell-vault engineering. Pre-cast concrete sails clad in over a million tiles rise from a granite podium &mdash; a UNESCO landmark that turned a competition entry into a national symbol.</p>
+              <div class="gallery-title">Kenyatta International Conference Centre</div>
+              <div class="gallery-meta"><span>Karl Henrik Nostvik &middot; 1973</span><span class="dot"></span><span>Nairobi CBD, Kenya</span></div>
+              <p class="gallery-desc">Kenya&rsquo;s most iconic tower &mdash; a 28-storey drum-and-saucer composition that has defined the Nairobi skyline since independence. The revolving restaurant and helipad atop its cylindrical crown remain landmarks of post-colonial modernism in East Africa.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">High-Rise</span>
+              <img src="gallery/ke-02-nairobi-skyline.jpg" alt="Nairobi Upperhill skyline with glass towers" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Nairobi Upperhill District</div>
+              <div class="gallery-meta"><span>Various Architects &middot; 2005&ndash;present</span><span class="dot"></span><span>Upperhill, Nairobi</span></div>
+              <p class="gallery-desc">Africa&rsquo;s fastest-growing commercial precinct. Upperhill&rsquo;s curtain-wall towers &mdash; including the UAP Old Mutual Tower and Times Tower &mdash; reflect Kenya&rsquo;s emergence as the region&rsquo;s premier business hub, rising above the forest canopy of the Nairobi National Park.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Cultural</span>
+              <img src="gallery/ke-03-nairobi-museum.jpg" alt="Nairobi National Museum main building" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Nairobi National Museum</div>
+              <div class="gallery-meta"><span>Somers &amp; Partners &middot; 1929 &amp; 2008</span><span class="dot"></span><span>Museum Hill, Nairobi</span></div>
+              <p class="gallery-desc">Refurbished and expanded by Skidmore, Owings &amp; Merrill, the museum&rsquo;s contemporary wing wraps a new glass atrium around the colonial-era core. It anchors the museum hill cultural precinct and houses East Africa&rsquo;s most significant natural history and art collections.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Heritage</span>
+              <img src="gallery/ke-04-fort-jesus.jpg" alt="Fort Jesus Mombasa Portuguese coral walls" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Fort Jesus</div>
+              <div class="gallery-meta"><span>Jo&atilde;o Batista Cairato &middot; 1593</span><span class="dot"></span><span>Mombasa Island, Kenya</span></div>
+              <p class="gallery-desc">A UNESCO World Heritage Site, Fort Jesus is one of the finest examples of 16th-century Portuguese military architecture. Built of coral rag on the Mombasa headland, its bastions and angular plan reflect the geometric principles of the Italian architect Matteo Cipolla &mdash; an enduring symbol of the Swahili Coast&rsquo;s layered history.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag gold">Heritage</span>
+              <img src="gallery/ke-05-lamu.jpg" alt="Lamu Old Town coral stone buildings and narrow streets" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Lamu Old Town</div>
+              <div class="gallery-meta"><span>Swahili craftsmen &middot; 13th century onwards</span><span class="dot"></span><span>Lamu Island, Kenya</span></div>
+              <p class="gallery-desc">East Africa&rsquo;s oldest living town and a UNESCO World Heritage Site. Lamu&rsquo;s coral-stone architecture &mdash; with its elaborately carved wooden doors, inner courtyards, and natural ventilation strategies &mdash; represents one of the world&rsquo;s most sophisticated pre-industrial climate-responsive building traditions.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag gold">Commercial</span>
+              <img src="gallery/ke-06-nairobi-modern.jpg" alt="Modern Nairobi commercial development glass facades" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Two Rivers Mall</div>
+              <div class="gallery-meta"><span>Boogertman + Partners &middot; 2017</span><span class="dot"></span><span>Runda, Nairobi</span></div>
+              <p class="gallery-desc">East and Central Africa&rsquo;s largest mall at its opening &mdash; a 67,000&nbsp;m&sup2; mixed-use development set along the Kiambu Road corridor. Its design integrates open-air plazas, water features, and generous daylighting, drawing on Kenyan landscape and climate to create a destination rather than a box.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag green">Hospitality</span>
+              <img src="gallery/ke-07-kenya-resort.jpg" alt="Eco-lodge nestled in Kenyan savannah landscape" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Angama Mara Eco-Lodge</div>
+              <div class="gallery-meta"><span>Silvio Rech &amp; Lesley Carstens &middot; 2015</span><span class="dot"></span><span>Maasai Mara, Kenya</span></div>
+              <p class="gallery-desc">Suspended 300 metres above the Mara on the Great Rift Valley escarpment, Angama Mara&rsquo;s twin camps use tented glass-walled suites that dissolve the boundary between interior and landscape. Its architecture won international acclaim for environmental sensitivity and contextual design in a fragile ecosystem.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Institutional</span>
+              <img src="gallery/ke-08-africa-modern.jpg" alt="Aga Khan Academy Nairobi campus modern architecture" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Aga Khan Academy, Nairobi</div>
+              <div class="gallery-meta"><span>Dar al-Handasah Architects &middot; 2003</span><span class="dot"></span><span>Westlands, Nairobi</span></div>
+              <p class="gallery-desc">A flagship educational campus on 40 acres of Gigiri forest. The academy&rsquo;s buildings are arranged along natural contours, with shaded colonnades, planted roofs, and passive ventilation systems designed for Nairobi&rsquo;s equatorial climate &mdash; a model of how institutional architecture can respect landscape and community.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
+            <div class="gallery-media">
+              <span class="gallery-tag">Commercial</span>
+              <img src="gallery/ke-09-nairobi-office.jpg" alt="Nairobi Westlands commercial office towers" loading="lazy">
+            </div>
+            <div class="gallery-body">
+              <div class="gallery-title">Westlands Commercial Hub</div>
+              <div class="gallery-meta"><span>Various Architects &middot; 1990&ndash;2020</span><span class="dot"></span><span>Westlands, Nairobi</span></div>
+              <p class="gallery-desc">The Westlands district has evolved into one of Africa&rsquo;s most dynamic commercial corridors. Delta House, Pinetree Centre, and the Parkside Towers demonstrate how Nairobi&rsquo;s private sector has driven a distinctly Kenyan vocabulary of curtain wall and mixed-use podium architecture adapted for equatorial light and monsoon rains.</p>
+            </div>
+          </article>
+
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
               <span class="gallery-tag green">Residential</span>
-              <img src="gallery/02-fallingwater.jpg" alt="Fallingwater cantilevered above Bear Run stream" loading="lazy">
+              <img src="gallery/ke-10-africa-villa.jpg" alt="Luxury Nairobi Karen residential villa with tropical gardens" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Fallingwater</div>
-              <div class="gallery-meta"><span>Frank Lloyd Wright &middot; 1939</span><span class="dot"></span><span>Mill Run, Pennsylvania</span></div>
-              <p class="gallery-desc">A private home cantilevered directly over a waterfall. Built of local sandstone and reinforced concrete, it remains the defining example of organic architecture &mdash; a building in conversation with its landscape.</p>
+              <div class="gallery-title">Karen Residential Villas</div>
+              <div class="gallery-meta"><span>Various Architects &middot; 2000&ndash;present</span><span class="dot"></span><span>Karen, Nairobi</span></div>
+              <p class="gallery-desc">Nairobi&rsquo;s leafy Karen suburb &mdash; named after Karen Blixen &mdash; has become the setting for some of Kenya&rsquo;s finest contemporary residential architecture. Stone-clad homes with wide verandahs, planted courtyards, and natural swimming ponds reflect a distinctly Kenyan aesthetic that balances privacy, nature, and indoor-outdoor living.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
-              <span class="gallery-tag gold">High-Rise</span>
-              <img src="gallery/03-burj-khalifa.jpg" alt="Burj Khalifa tower against the Dubai sky" loading="lazy">
+              <span class="gallery-tag gold">Interiors</span>
+              <img src="gallery/ke-11-kenya-interior.jpg" alt="Contemporary Kenyan interior design with natural materials" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Burj Khalifa</div>
-              <div class="gallery-meta"><span>SOM &middot; Adrian Smith &middot; 2010</span><span class="dot"></span><span>Dubai, UAE</span></div>
-              <p class="gallery-desc">At 828&nbsp;metres, the world&rsquo;s tallest structure. A buttressed-core system inspired by the Hymenocallis flower allows the tower to step gracefully toward the sky while resisting desert wind loads.</p>
+              <div class="gallery-title">Kenyan Contemporary Interiors</div>
+              <div class="gallery-meta"><span>Kenyan Design Studios &middot; 2010&ndash;present</span><span class="dot"></span><span>Nairobi, Kenya</span></div>
+              <p class="gallery-desc">A new generation of Nairobi-based interior designers has built a global reputation for spaces that weave together Kenyan craftsmanship, natural materials &mdash; sisal, olive wood, hand-woven textiles &mdash; and contemporary spatial sensibility. Their work is increasingly commissioned from London to New York.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
-              <span class="gallery-tag">Cultural</span>
-              <img src="gallery/04-guggenheim-bilbao.jpg" alt="Guggenheim Museum Bilbao titanium curves" loading="lazy">
+              <span class="gallery-tag green">Green</span>
+              <img src="gallery/ke-12-kenya-green.jpg" alt="Green building with planted terraces and solar panels in Nairobi" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Guggenheim Museum Bilbao</div>
-              <div class="gallery-meta"><span>Frank Gehry &middot; 1997</span><span class="dot"></span><span>Bilbao, Spain</span></div>
-              <p class="gallery-desc">Sculpted titanium volumes catch the river light along the Nervi&oacute;n. Designed using aerospace CAD software, it sparked the &ldquo;Bilbao effect&rdquo; &mdash; the idea that great architecture can transform a city&rsquo;s economy.</p>
+              <div class="gallery-title">Nairobi Green Building Standard</div>
+              <div class="gallery-meta"><span>Kenya Green Building Society &middot; 2011&ndash;present</span><span class="dot"></span><span>Nairobi, Kenya</span></div>
+              <p class="gallery-desc">Kenya is East Africa&rsquo;s leader in green building certification. From solar-powered schools in Kibera to LEED-certified corporate campuses in Upperhill, Kenyan architects and developers are demonstrating that environmental responsibility and commercial success are not in conflict &mdash; they are inseparable.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
-              <span class="gallery-tag gold">Mixed-Use</span>
-              <img src="gallery/05-the-shard.jpg" alt="The Shard tower in London" loading="lazy">
+              <span class="gallery-tag">Infrastructure</span>
+              <img src="gallery/ke-13-nairobi-road.jpg" alt="Nairobi Expressway modern elevated road infrastructure" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">The Shard</div>
-              <div class="gallery-meta"><span>Renzo Piano &middot; 2012</span><span class="dot"></span><span>London, United Kingdom</span></div>
-              <p class="gallery-desc">A tapered, 310-metre glass spire above London Bridge Station. Eight inclined facets refract the sky differently throughout the day, a vertical city of offices, hotel, residences, and public viewing decks.</p>
+              <div class="gallery-title">Nairobi Expressway</div>
+              <div class="gallery-meta"><span>China Road &amp; Bridge Corp. &middot; 2022</span><span class="dot"></span><span>Nairobi, Kenya</span></div>
+              <p class="gallery-desc">The 27-kilometre elevated Nairobi Expressway &mdash; connecting JKIA to Westlands &mdash; is the largest infrastructure project in Kenya&rsquo;s history. Its sinuous elevated deck, designed to minimise land acquisition while threading through a dense urban fabric, has reshaped the experience of moving through East Africa&rsquo;s largest city.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
-              <span class="gallery-tag">Cultural</span>
-              <img src="gallery/06-heydar-aliyev.jpg" alt="Heydar Aliyev Center under construction" loading="lazy">
+              <span class="gallery-tag gold">Cultural</span>
+              <img src="gallery/ke-14-africa-archi.jpg" alt="African modernist civic architecture with bold geometric forms" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Heydar Aliyev Center</div>
-              <div class="gallery-meta"><span>Zaha Hadid Architects &middot; 2012</span><span class="dot"></span><span>Baku, Azerbaijan</span></div>
-              <p class="gallery-desc">A continuous, fluid surface that folds the plaza, walls, and roof into a single gesture. Engineered with a space-frame structure clad in fibre-reinforced polymer, it is a manifesto for parametric design.</p>
+              <div class="gallery-title">Bomas of Kenya</div>
+              <div class="gallery-meta"><span>Government of Kenya &middot; 1971</span><span class="dot"></span><span>Langata, Nairobi</span></div>
+              <p class="gallery-desc">A cultural village designed to preserve and celebrate the diverse homestead traditions of Kenya&rsquo;s 42-plus ethnic communities. The main Harambee Arena &mdash; with its 3,500-seat open-air amphitheatre &mdash; reflects a deliberate post-independence architectural agenda to honour indigenous spatial and material cultures.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
-              <span class="gallery-tag gold">Hospitality</span>
-              <img src="gallery/07-marina-bay-sands.jpg" alt="Marina Bay Sands three towers and SkyPark" loading="lazy">
+              <span class="gallery-tag green">Hospitality</span>
+              <img src="gallery/ke-15-safari-lodge.jpg" alt="Luxury tented safari lodge overlooking Kenyan landscape" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Marina Bay Sands</div>
-              <div class="gallery-meta"><span>Moshe Safdie &middot; 2010</span><span class="dot"></span><span>Singapore</span></div>
-              <p class="gallery-desc">Three 55-storey hotel towers crowned by a 340-metre cantilevered SkyPark with infinity pool, observation deck, and gardens. A feat of structural choreography that reshaped Singapore&rsquo;s skyline.</p>
+              <div class="gallery-title">Rift Valley Tented Lodges</div>
+              <div class="gallery-meta"><span>Various Architects &middot; 1990&ndash;present</span><span class="dot"></span><span>Rift Valley &amp; Laikipia, Kenya</span></div>
+              <p class="gallery-desc">Kenya&rsquo;s world-renowned safari lodge tradition has become a benchmark for luxury eco-architecture globally. From Laikipia&rsquo;s Ol Malo to Lewa&rsquo;s Ekorian&rsquo;s Mugie, these structures &mdash; raised on slender steel legs, clad in canvas and local timber &mdash; achieve near-zero footprint while creating some of the world&rsquo;s most extraordinary guest experiences.</p>
             </div>
           </article>
 
-          <article class="gallery-card">
-            <div class="gallery-media">
-              <span class="gallery-tag green">Residential</span>
-              <img src="gallery/08-villa-savoye.jpg" alt="Villa Savoye white modernist house" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Villa Savoye</div>
-              <div class="gallery-meta"><span>Le Corbusier &middot; 1931</span><span class="dot"></span><span>Poissy, France</span></div>
-              <p class="gallery-desc">The clearest demonstration of Le Corbusier&rsquo;s &ldquo;Five Points&rdquo;: pilotis, free plan, free fa&ccedil;ade, ribbon windows, and roof garden. A small white box that quietly rewrote the rules of the modern house.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card">
+          <article class="gallery-card reveal-card">
             <div class="gallery-media">
               <span class="gallery-tag">Civic</span>
-              <img src="gallery/09-lotus-temple.jpg" alt="Lotus Temple petals at sunset, New Delhi" loading="lazy">
+              <img src="gallery/ke-16-kenya-home.jpg" alt="Affordable housing development modern Kenya" loading="lazy">
             </div>
             <div class="gallery-body">
-              <div class="gallery-title">Lotus Temple</div>
-              <div class="gallery-meta"><span>Fariborz Sahba &middot; 1986</span><span class="dot"></span><span>New Delhi, India</span></div>
-              <p class="gallery-desc">Twenty-seven free-standing marble &ldquo;petals&rdquo; arranged in three layers around a central hall. A Bah&aacute;&rsquo;&iacute; House of Worship open to all faiths, and one of the most visited buildings in the world.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card">
-            <div class="gallery-media">
-              <span class="gallery-tag green">Housing</span>
-              <img src="gallery/10-habitat-67.jpg" alt="Habitat 67 modular concrete housing in Montreal" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Habitat 67</div>
-              <div class="gallery-meta"><span>Moshe Safdie &middot; 1967</span><span class="dot"></span><span>Montreal, Canada</span></div>
-              <p class="gallery-desc">354 prefabricated concrete modules stacked into 146 homes, each with its own roof garden and light on multiple sides. A pioneering experiment in dense, humane urban housing.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Civic</span>
-              <img src="gallery/11-sagrada-familia.jpg" alt="Sagrada Fam&iacute;lia fa&ccedil;ade in Barcelona" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Sagrada Fam&iacute;lia</div>
-              <div class="gallery-meta"><span>Antoni Gaud&iacute; &middot; from 1882</span><span class="dot"></span><span>Barcelona, Spain</span></div>
-              <p class="gallery-desc">Gaud&iacute;&rsquo;s lifelong basilica, a fusion of Gothic structure and natural geometry &mdash; hyperboloid vaults, branching columns, and light-filled towers. Construction continues over 140 years on, guided by his original models.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Sport</span>
-              <img src="gallery/12-birds-nest.jpg" alt="Beijing National Stadium Bird's Nest" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Beijing National Stadium</div>
-              <div class="gallery-meta"><span>Herzog &amp; de Meuron &middot; Ai Weiwei &middot; 2008</span><span class="dot"></span><span>Beijing, China</span></div>
-              <p class="gallery-desc">Built for the 2008 Olympics, the &ldquo;Bird&rsquo;s Nest&rdquo; weaves an exposed steel lattice around a 91,000-seat bowl &mdash; structure as ornament, ornament as structure.</p>
+              <div class="gallery-title">Kenya Affordable Housing Programme</div>
+              <div class="gallery-meta"><span>Various Architects &middot; 2018&ndash;present</span><span class="dot"></span><span>Nairobi &amp; Nationwide, Kenya</span></div>
+              <p class="gallery-desc">Kenya&rsquo;s 500,000-unit affordable housing agenda is reshaping how architects think about mass housing. Projects in Park Road Ngara, Starehe, and Shauri Moyo demonstrate that dignified, well-designed homes at scale are achievable with the right integration of community input, modular construction, and thoughtful landscape planning.</p>
             </div>
           </article>
 
@@ -1694,5 +1969,101 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
+  })();
+
+  // === Scroll-Reveal via IntersectionObserver ===
+  (function () {
+    if (!window.IntersectionObserver) return;
+
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var delay = el.dataset.delay || 0;
+          setTimeout(function () {
+            el.classList.add('is-visible');
+          }, parseFloat(delay));
+          revealObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    function observeSection(sectionId) {
+      var section = document.getElementById(sectionId);
+      if (!section) return;
+      section.querySelectorAll('.reveal-card, .reveal-up, .reveal-left, .reveal-right').forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    }
+
+    ['home', 'what-we-do', 'who-we-are', 'contact-us'].forEach(observeSection);
+
+    var origShow = window.showSection;
+    window.showSection = function (id, el) {
+      origShow(id, el);
+      setTimeout(function () { observeSection(id); }, 80);
+    };
+  })();
+
+  // === Staggered gallery card delay ===
+  (function () {
+    document.querySelectorAll('.gallery-grid .reveal-card').forEach(function (card, i) {
+      card.dataset.delay = (i % 4) * 90;
+    });
+  })();
+
+
+  // === Animated counter for stat numbers ===
+  (function () {
+    function animateCounter(el, target, duration) {
+      var start = 0;
+      var startTime = null;
+      var isInfinity = (target === '∞');
+      if (isInfinity) return;
+      var numTarget = parseInt(target, 10);
+      if (isNaN(numTarget)) return;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(eased * numTarget);
+        el.textContent = current;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    if (!window.IntersectionObserver) return;
+    var counterObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var original = el.dataset.target;
+          if (original) animateCounter(el, original, 1400);
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-num').forEach(function (el) {
+      el.dataset.target = el.textContent.trim();
+      counterObs.observe(el);
+    });
+  })();
+
+  // === Subtle parallax on hero orbs ===
+  (function () {
+    var orbs = document.querySelectorAll('.hero-orb');
+    if (!orbs.length) return;
+    window.addEventListener('mousemove', function (e) {
+      var x = (e.clientX / window.innerWidth - 0.5) * 18;
+      var y = (e.clientY / window.innerHeight - 0.5) * 14;
+      orbs.forEach(function (orb, i) {
+        var factor = (i + 1) * 0.35;
+        orb.style.transform = 'translate(' + (x * factor) + 'px, ' + (y * factor) + 'px)';
+      });
+    }, { passive: true });
   })();
 </script>
