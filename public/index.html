@@ -110,16 +110,55 @@
   .logo {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: 1.2rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--stone);
     text-decoration: none;
-    display: inline-flex; align-items: center;
+    display: inline-flex; align-items: center; gap: 0.85rem;
     transition: opacity var(--t-fast);
   }
   .logo:hover { opacity: 0.85; }
-  .logo span { color: var(--warm); font-style: italic; }
+  .logo-mark,
+  .footer-logo-mark {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px;
+    background: var(--paper);
+    box-shadow: var(--shadow-sm);
+    flex: 0 0 auto;
+  }
+  .logo-copy,
+  .footer-logo-copy {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .logo-copy strong,
+  .footer-logo-copy strong {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .logo-copy span,
+  .footer-logo-copy span {
+    margin-top: 0.2rem;
+    color: var(--warm);
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   .nav-links { display: flex; gap: 2.25rem; list-style: none; align-items: center; }
   .nav-links a:not(.nav-cta) {
@@ -1120,12 +1159,12 @@
   }
   .footer-brand { max-width: 460px; }
   .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: #fff; margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: #fff;
+    margin-bottom: 1rem;
   }
-  .footer-logo span { color: var(--warm); font-style: italic; }
   .footer-copy {
     font-size: 0.92rem; color: rgba(255,255,255,0.7);
     line-height: 1.85;
@@ -1177,6 +1216,12 @@
   /* === Responsive === */
   @media (max-width: 900px) {
     .nav-toggle { display: inline-flex; }
+    .logo-mark,
+    .footer-logo-mark { width: 48px; height: 48px; border-radius: 12px; }
+    .logo-copy strong,
+    .footer-logo-copy strong { font-size: 0.95rem; letter-spacing: 0.12em; }
+    .logo-copy span,
+    .footer-logo-copy span { font-size: 0.74rem; }
     .nav-links {
       position: fixed;
       top: 0; right: 0; bottom: 0;
@@ -1226,7 +1271,11 @@
   @media (max-width: 560px) {
     .social-links { grid-template-columns: 1fr; }
     nav { padding: 0.9rem 1rem; }
-    .logo { font-size: 1rem; letter-spacing: 0.14em; }
+    .logo { gap: 0.7rem; }
+    .logo-mark,
+    .footer-logo-mark { width: 42px; height: 42px; border-radius: 11px; }
+    .logo-copy strong,
+    .footer-logo-copy strong { font-size: 0.9rem; letter-spacing: 0.11em; }
     .hero h1 { font-size: 2.5rem; }
     .hero-stats { gap: 1.75rem; }
     .stat-item .stat-num { font-size: 2rem; }
@@ -1470,7 +1519,11 @@
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <nav id="siteNav">
-    <a class="logo" href="#home" onclick="showSection('home'); return false;">Plankraft<span> International</span></a>
+    <a class="logo" href="#home" onclick="showSection('home'); return false;" aria-label="Plankraft International home">
+      <img class="logo-mark" src="logo.jpeg" alt="Plankraft International logo" width="56" height="56" decoding="async">
+      <span class="logo-copy"><strong>Plankraft</strong><span>International</span></span>
+      <span class="sr-only">Plankraft International</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
@@ -1905,7 +1958,11 @@
   <footer class="site-footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <p class="footer-logo">Plankraft<span> International</span></p>
+        <a class="footer-logo" href="#home" onclick="showSection('home'); return false;" aria-label="Plankraft International home">
+          <img class="footer-logo-mark" src="logo.jpeg" alt="Plankraft International logo" width="56" height="56" decoding="async">
+          <span class="footer-logo-copy"><strong>Plankraft</strong><span>International</span></span>
+          <span class="sr-only">Plankraft International</span>
+        </a>
         <p class="footer-copy">Designing architecture, interiors, and planning solutions with precision, character, and long-term value. We create spaces that work beautifully in daily life and endure over time.</p>
       </div>
 
@@ -1945,6 +2002,36 @@
 
 <script>
   const destinationAddress = 'Masta Villa Plaza, Highpoint, Juja, Kenya';
+
+  (function setupBrandAssets() {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    if (!head) return;
+
+    const links = [
+      { rel: 'icon', href: 'logo.jpeg', type: 'image/jpeg' },
+      { rel: 'shortcut icon', href: 'logo.jpeg', type: 'image/jpeg' },
+      { rel: 'apple-touch-icon', href: 'logo.jpeg', type: 'image/jpeg' }
+    ];
+
+    links.forEach(function (config) {
+      let link = head.querySelector('link[rel="' + config.rel + '"]');
+      if (!link) {
+        link = document.createElement('link');
+        head.appendChild(link);
+      }
+      link.rel = config.rel;
+      link.href = config.href;
+      link.type = config.type;
+    });
+
+    let themeColor = head.querySelector('meta[name="theme-color"]');
+    if (!themeColor) {
+      themeColor = document.createElement('meta');
+      themeColor.name = 'theme-color';
+      head.appendChild(themeColor);
+    }
+    themeColor.content = '#25221E';
+  })();
 
   function buildDirectionsEmbed(origin) {
     return 'https://www.google.com/maps?output=embed&saddr=' + encodeURIComponent(origin) + '&daddr=' + encodeURIComponent(destinationAddress) + '&dirflg=d';
