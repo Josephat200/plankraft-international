@@ -6,3 +6,21 @@ id = "jF9agz1NvgGcWtWe0Rw7y"
 uri = "file://public/hero-bg.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "CchOIxZA0VImgEpgxQYwS"
+uri = "file://public/bg-what-we-do.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "KUHNB_QFtC668Qc0-4LKQ"
+uri = "file://public/bg-who-we-are.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ObH-2UM2fclTXxTbf1vmg"
+uri = "file://public/bg-contact-us.png"
+type = "image"
+title = "generated_image"
