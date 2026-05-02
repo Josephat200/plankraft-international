@@ -636,72 +636,76 @@
   }
   .services-intro p + p { margin-top: 1.4rem; }
 
+  /* === Services — editorial horizontal list === */
   .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+    margin-bottom: clamp(3rem, 5vw, 4.5rem);
   }
   .service-item {
-    padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
-    background: var(--paper);
-    transition: background var(--t), transform var(--t);
+    display: grid;
+    grid-template-columns: 72px minmax(190px, 220px) 1fr;
+    gap: 0 clamp(2rem, 4vw, 4rem);
+    align-items: start;
+    padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 4vw, 2rem);
+    border-bottom: 1px solid var(--line);
+    background: transparent;
     position: relative;
-    overflow: hidden;
+    transition: background 0.35s ease;
+    cursor: default;
   }
   .service-item::before {
-    content: ''; position: absolute; left: 0; top: 0;
-    width: 100%; height: 3px;
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
     background: var(--gradient-warm);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.5s var(--ease-out);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform 0.45s var(--ease-out);
   }
-  .service-item::after {
-    content: ''; position: absolute; right: -40px; bottom: -40px;
-    width: 120px; height: 120px;
-    background: radial-gradient(circle, rgba(185,138,79,0.12) 0%, transparent 70%);
-    opacity: 0; transition: opacity var(--t);
-    pointer-events: none;
-  }
-  .service-item:hover {
-    background: linear-gradient(180deg, var(--cream-warm) 0%, var(--paper) 100%);
-  }
-  .service-item:hover::before { transform: scaleX(1); }
-  .service-item:hover::after { opacity: 1; }
-  .service-item:hover .service-num {
-    transform: translateX(4px);
-  }
+  .service-item:hover { background: rgba(185,138,79,0.04); }
+  .service-item:hover::before { transform: scaleY(1); }
+  .service-item:hover .service-num { transform: translateY(-2px); }
+  .service-item:nth-child(5) .service-num { color: var(--sage); }
+  .service-item:nth-child(5)::before { background: linear-gradient(180deg, var(--sage-light), var(--sage)); }
+  .service-item:nth-child(5):hover { background: rgba(107,124,94,0.05); }
   .service-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.4rem; font-weight: 400;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: var(--warm);
-    font-style: italic; letter-spacing: 0;
-    margin-bottom: 1.25rem; display: inline-block;
-    line-height: 1;
+    font-size: clamp(2.6rem, 4vw, 3.4rem); font-weight: 300;
+    color: var(--warm); font-style: italic; line-height: 1;
+    padding-top: 0.2rem;
     transition: transform var(--t);
+    flex-shrink: 0;
   }
   .service-title {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 500; font-size: 1.55rem;
-    color: var(--stone); margin-bottom: 1rem;
-    line-height: 1.25;
-    letter-spacing: -0.005em;
+    font-weight: 500; font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+    color: var(--stone); line-height: 1.25; letter-spacing: -0.005em;
+    padding-top: 0.55rem;
   }
   .service-desc {
     font-size: 0.9rem; color: var(--mid);
     line-height: 1.85; font-weight: 300;
+    padding-top: 0.55rem;
   }
-  /* Special tint for "Green Buildings" — subtly sage */
-  .service-item:nth-child(5)::before { background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage) 100%); }
-  .service-item:nth-child(5):hover {
-    background: linear-gradient(180deg, rgba(159,175,145,0.08) 0%, var(--paper) 100%);
+
+  /* === Gallery filter bar === */
+  .gallery-filter-bar {
+    display: flex; flex-wrap: wrap; gap: 0.45rem;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
   }
+  .gf-btn {
+    padding: 0.42rem 1.05rem;
+    border: 1px solid var(--line);
+    background: transparent;
+    font-family: inherit; font-size: 0.73rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mid); cursor: pointer;
+    transition: background 0.22s, border-color 0.22s, color 0.22s;
+    border-radius: 2px;
+  }
+  .gf-btn:hover { background: rgba(185,138,79,0.08); border-color: var(--warm); color: var(--warm); }
+  .gf-btn.active { background: var(--warm); border-color: var(--warm); color: #fff; }
+  .gallery-card.gf-hidden { display: none; }
 
   /* === Inspirations Gallery === */
   .gallery-section {
@@ -1266,9 +1270,16 @@
     .hero::before, .hero::after { display: none; }
     .philosophy-strip::before { font-size: 14rem; left: 0.25rem; top: -1.5rem; }
     .page-header::before { width: 320px; height: 320px; right: -160px; top: -160px; }
+    .service-item {
+      grid-template-columns: 52px 1fr;
+      grid-template-rows: auto auto;
+    }
+    .service-desc { grid-column: 2 / -1; }
   }
 
   @media (max-width: 560px) {
+    .service-item { grid-template-columns: 48px 1fr; }
+    .service-desc { grid-column: 1 / -1; padding-top: 0.25rem; }
     .social-links { grid-template-columns: 1fr; }
     nav { padding: 0.9rem 1rem; }
     .logo { gap: 0.7rem; }
@@ -1611,9 +1622,23 @@
           <p>A curated celebration of Kenya&rsquo;s architectural identity &mdash; from Nairobi&rsquo;s evolving skyline and the ancient coral towns of the Coast, to the award-winning eco-lodges of the Rift Valley and Maasai Mara. These landmarks inspire our work and deepen our commitment to design rooted in Kenyan place, climate, and culture.</p>
         </div>
 
+        <div class="gallery-filter-bar">
+          <button class="gf-btn active" data-filter="all">All</button>
+          <button class="gf-btn" data-filter="civic">Civic</button>
+          <button class="gf-btn" data-filter="heritage">Heritage</button>
+          <button class="gf-btn" data-filter="cultural">Cultural</button>
+          <button class="gf-btn" data-filter="commercial">Commercial</button>
+          <button class="gf-btn" data-filter="hospitality">Hospitality</button>
+          <button class="gf-btn" data-filter="residential">Residential</button>
+          <button class="gf-btn" data-filter="institutional">Institutional</button>
+          <button class="gf-btn" data-filter="green">Green</button>
+          <button class="gf-btn" data-filter="infrastructure">Infrastructure</button>
+          <button class="gf-btn" data-filter="interiors">Interiors</button>
+        </div>
+
         <div class="gallery-grid">
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="civic">
             <div class="gallery-media">
               <span class="gallery-tag gold">Civic</span>
               <img src="gallery/ke-01-kicc.jpg" alt="Kenyatta International Conference Centre Nairobi" loading="lazy">
@@ -1625,7 +1650,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="commercial">
             <div class="gallery-media">
               <span class="gallery-tag">High-Rise</span>
               <img src="gallery/ke-02-nairobi-skyline.jpg" alt="Nairobi Upperhill skyline with glass towers" loading="lazy">
@@ -1637,7 +1662,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="cultural">
             <div class="gallery-media">
               <span class="gallery-tag">Cultural</span>
               <img src="gallery/ke-03-nairobi-museum.jpg" alt="Nairobi National Museum main building" loading="lazy">
@@ -1649,7 +1674,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="heritage">
             <div class="gallery-media">
               <span class="gallery-tag">Heritage</span>
               <img src="gallery/ke-04-fort-jesus.jpg" alt="Fort Jesus Mombasa Portuguese coral walls" loading="lazy">
@@ -1661,7 +1686,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="heritage">
             <div class="gallery-media">
               <span class="gallery-tag gold">Heritage</span>
               <img src="gallery/ke-05-lamu.jpg" alt="Lamu Old Town coral stone buildings and narrow streets" loading="lazy">
@@ -1673,7 +1698,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="commercial">
             <div class="gallery-media">
               <span class="gallery-tag gold">Commercial</span>
               <img src="gallery/ke-06-nairobi-modern.jpg" alt="Modern Nairobi commercial development glass facades" loading="lazy">
@@ -1685,7 +1710,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="hospitality">
             <div class="gallery-media">
               <span class="gallery-tag green">Hospitality</span>
               <img src="gallery/ke-07-kenya-resort.jpg" alt="Eco-lodge nestled in Kenyan savannah landscape" loading="lazy">
@@ -1697,7 +1722,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="institutional">
             <div class="gallery-media">
               <span class="gallery-tag">Institutional</span>
               <img src="gallery/ke-08-africa-modern.jpg" alt="Aga Khan Academy Nairobi campus modern architecture" loading="lazy">
@@ -1709,7 +1734,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="commercial">
             <div class="gallery-media">
               <span class="gallery-tag">Commercial</span>
               <img src="gallery/ke-09-nairobi-office.jpg" alt="Nairobi Westlands commercial office towers" loading="lazy">
@@ -1721,7 +1746,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="residential">
             <div class="gallery-media">
               <span class="gallery-tag green">Residential</span>
               <img src="gallery/ke-10-africa-villa.jpg" alt="Luxury Nairobi Karen residential villa with tropical gardens" loading="lazy">
@@ -1733,7 +1758,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="interiors">
             <div class="gallery-media">
               <span class="gallery-tag gold">Interiors</span>
               <img src="gallery/ke-11-kenya-interior.jpg" alt="Contemporary Kenyan interior design with natural materials" loading="lazy">
@@ -1745,7 +1770,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="green">
             <div class="gallery-media">
               <span class="gallery-tag green">Green</span>
               <img src="gallery/ke-12-kenya-green.jpg" alt="Green building with planted terraces and solar panels in Nairobi" loading="lazy">
@@ -1757,7 +1782,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="infrastructure">
             <div class="gallery-media">
               <span class="gallery-tag">Infrastructure</span>
               <img src="gallery/ke-13-nairobi-road.jpg" alt="Nairobi Expressway modern elevated road infrastructure" loading="lazy">
@@ -1769,7 +1794,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="cultural">
             <div class="gallery-media">
               <span class="gallery-tag gold">Cultural</span>
               <img src="gallery/ke-14-africa-archi.jpg" alt="African modernist civic architecture with bold geometric forms" loading="lazy">
@@ -1781,7 +1806,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="hospitality">
             <div class="gallery-media">
               <span class="gallery-tag green">Hospitality</span>
               <img src="gallery/ke-15-safari-lodge.jpg" alt="Luxury tented safari lodge overlooking Kenyan landscape" loading="lazy">
@@ -1793,7 +1818,7 @@
             </div>
           </article>
 
-          <article class="gallery-card reveal-card">
+          <article class="gallery-card reveal-card" data-category="civic">
             <div class="gallery-media">
               <span class="gallery-tag">Civic</span>
               <img src="gallery/ke-16-kenya-home.jpg" alt="Affordable housing development modern Kenya" loading="lazy">
@@ -2291,5 +2316,25 @@
         orb.style.transform = 'translate(' + (x * factor) + 'px, ' + (y * factor) + 'px)';
       });
     }, { passive: true });
+  })();
+
+  // === Gallery category filter ===
+  (function () {
+    var bar = document.querySelector('.gallery-filter-bar');
+    if (!bar) return;
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.gf-btn');
+      if (!btn) return;
+      bar.querySelectorAll('.gf-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.gallery-card').forEach(function (card) {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('gf-hidden');
+        } else {
+          card.classList.add('gf-hidden');
+        }
+      });
+    });
   })();
 </script>

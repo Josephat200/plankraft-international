@@ -24,3 +24,63 @@ id = "ObH-2UM2fclTXxTbf1vmg"
 uri = "file://public/bg-contact-us.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "mWeNra_LAPCgYOYtp_I5Q"
+uri = "file://public/gallery/ke-01-kicc.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "GJeSQMteOFkIDtjb9XuSf"
+uri = "file://public/gallery/ke-02-nairobi-skyline.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "sxGWKVguQP4uot74bp-Td"
+uri = "file://public/gallery/ke-03-nairobi-museum.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "3Cd2YkOydZHFCQhMczHC0"
+uri = "file://public/gallery/ke-04-fort-jesus.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "7oNrb3WaZRYyD_TmCIpW7"
+uri = "file://public/gallery/ke-05-lamu.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "k_VYu_sVV1NPJ4HBnmB5W"
+uri = "file://public/gallery/ke-06-nairobi-modern.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "9yDJsfCcrq0H9--PneIDu"
+uri = "file://public/gallery/ke-07-kenya-resort.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "8vQG1l94Expl5mo-pTguj"
+uri = "file://public/gallery/ke-08-africa-modern.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "rQKtf4AvhcSK3yliP2fF3"
+uri = "file://public/gallery/ke-09-nairobi-office.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ZRoa2wksMzgQCD9i80Dr6"
+uri = "file://public/gallery/ke-10-africa-villa.png"
+type = "image"
+title = "generated_image"
