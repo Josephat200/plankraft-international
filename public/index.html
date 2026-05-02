@@ -675,10 +675,9 @@
 
   .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
-  @media (max-width: 1100px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 768px)  { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px)  { .portfolio-grid { grid-template-columns: 1fr; } }
 
@@ -813,7 +812,51 @@
   }
   .about-section > * { max-width: var(--container); margin-left: auto; margin-right: auto; }
 
-  .about-intro { max-width: 740px; margin: 0 0 clamp(4rem, 8vw, 6rem) 0; }
+  .about-intro { max-width: 740px; margin: 0 0 clamp(2.5rem, 5vw, 4rem) 0; }
+
+  /* Services strip inside Who We Are */
+  .services-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+  }
+  .service-item {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--line);
+    transition: background var(--t);
+  }
+  .service-item:last-child { border-right: none; }
+  .service-item:hover { background: rgba(185,138,79,0.04); }
+  .service-num {
+    font-size: 0.68rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--warm);
+    font-weight: 600; margin-bottom: 0.9rem;
+  }
+  .service-name {
+    font-family: var(--serif); font-size: 1.05rem;
+    color: var(--ink); line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+  .service-desc {
+    font-size: 0.82rem; color: var(--stone-soft);
+    line-height: 1.65; font-weight: 300;
+  }
+  @media (max-width: 900px) {
+    .services-strip { grid-template-columns: repeat(3, 1fr); }
+    .service-item:nth-child(3) { border-right: none; }
+    .service-item:nth-child(4),
+    .service-item:nth-child(5) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 600px) {
+    .services-strip { grid-template-columns: 1fr 1fr; }
+    .service-item { border-right: none; border-bottom: 1px solid var(--line); }
+    .service-item:nth-child(odd) { border-right: 1px solid var(--line); }
+    .service-item:nth-child(3) { border-right: 1px solid var(--line); }
+    .service-item:last-child { border-bottom: none; }
+  }
   .about-intro p {
     font-size: 1.05rem; color: var(--stone-soft);
     line-height: 1.9; font-weight: 300;
@@ -1608,6 +1651,35 @@
         <p>Plankraft International is a design practice founded on the conviction that architecture is one of the most consequential acts of human creativity. We are a lean, focused studio &mdash; built on talent, not scale &mdash; where each project receives the full weight of our collective expertise and personal investment.</p>
         <p>We operate at the intersection of design rigour and practical delivery, bridging the conceptual and the constructed with equal fluency. Our team brings diverse strengths to every commission: from the precision of BIM workflows to the tactile craft of physical model-making, from the sweep of strategic planning to the discipline of on-site execution.</p>
         <p>We believe the best architecture emerges from curiosity, collaboration, and an uncompromising commitment to craft &mdash; and we bring all three to every project we touch.</p>
+      </div>
+
+      <div class="team-label">Our Services</div>
+      <div class="services-strip">
+        <div class="service-item">
+          <div class="service-num">01</div>
+          <div class="service-name">Architectural Design</div>
+          <div class="service-desc">Concept through construction — residential, commercial, civic, and hospitality projects designed with rigour and creativity at every scale.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">02</div>
+          <div class="service-name">Interior Design</div>
+          <div class="service-desc">Spatial planning and material storytelling that translate architectural intent into fully resolved interior environments, from single rooms to entire buildings.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">03</div>
+          <div class="service-name">Urban & Master Planning</div>
+          <div class="service-desc">Large-scale frameworks for townships, corridors, and precincts — balancing density, movement, green space, and community infrastructure.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">04</div>
+          <div class="service-name">Project Management</div>
+          <div class="service-desc">End-to-end delivery oversight encompassing programme, budget, procurement, contractor coordination, and client reporting from inception to handover.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">05</div>
+          <div class="service-name">Construction Supervision</div>
+          <div class="service-desc">On-site architectural supervision ensuring design intent, material quality, and workmanship standards are preserved through every phase of construction.</div>
+        </div>
       </div>
 
       <div class="team-label">Our Architects</div>
