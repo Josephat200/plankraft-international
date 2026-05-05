@@ -110,16 +110,55 @@
   .logo {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: 1.2rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--stone);
     text-decoration: none;
-    display: inline-flex; align-items: center;
+    display: inline-flex; align-items: center; gap: 0.85rem;
     transition: opacity var(--t-fast);
   }
   .logo:hover { opacity: 0.85; }
-  .logo span { color: var(--warm); font-style: italic; }
+  .logo-mark,
+  .footer-logo-mark {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px;
+    background: var(--paper);
+    box-shadow: var(--shadow-sm);
+    flex: 0 0 auto;
+  }
+  .logo-copy,
+  .footer-logo-copy {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .logo-copy strong,
+  .footer-logo-copy strong {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .logo-copy span,
+  .footer-logo-copy span {
+    margin-top: 0.2rem;
+    color: var(--warm);
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   .nav-links { display: flex; gap: 2.25rem; list-style: none; align-items: center; }
   .nav-links a:not(.nav-cta) {
@@ -590,207 +629,181 @@
   }
   .section-body > * { max-width: var(--container); margin-left: auto; margin-right: auto; }
 
-  .services-intro { max-width: 740px; margin: 0 0 clamp(3rem, 6vw, 5rem) 0; }
-  .services-intro p {
-    font-size: 1.05rem; color: var(--stone-soft);
-    line-height: 1.9; font-weight: 300;
+  /* === Portfolio — What We Do === */
+  .portfolio-wrap {
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem);
   }
-  .services-intro p + p { margin-top: 1.4rem; }
+  .portfolio-wrap > * { max-width: var(--container); margin-left: auto; margin-right: auto; }
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-sm);
+  .portfolio-filter-row {
+    display: flex; align-items: center; gap: 1.25rem;
+    margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+    flex-wrap: wrap;
   }
-  .service-item {
-    padding: clamp(2rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
-    background: var(--paper);
-    transition: background var(--t), transform var(--t);
-    position: relative;
-    overflow: hidden;
+  .pf-filter-label {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--mid); font-weight: 500; white-space: nowrap;
   }
-  .service-item::before {
-    content: ''; position: absolute; left: 0; top: 0;
-    width: 100%; height: 3px;
-    background: var(--gradient-warm);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.5s var(--ease-out);
-  }
-  .service-item::after {
-    content: ''; position: absolute; right: -40px; bottom: -40px;
-    width: 120px; height: 120px;
-    background: radial-gradient(circle, rgba(185,138,79,0.12) 0%, transparent 70%);
-    opacity: 0; transition: opacity var(--t);
+  .pf-select-wrap { position: relative; }
+  .pf-select-wrap::after {
+    content: '';
+    position: absolute; right: 1rem; top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--warm);
     pointer-events: none;
   }
-  .service-item:hover {
-    background: linear-gradient(180deg, var(--cream-warm) 0%, var(--paper) 100%);
-  }
-  .service-item:hover::before { transform: scaleX(1); }
-  .service-item:hover::after { opacity: 1; }
-  .service-item:hover .service-num {
-    transform: translateX(4px);
-  }
-  .service-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.4rem; font-weight: 400;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: var(--warm);
-    font-style: italic; letter-spacing: 0;
-    margin-bottom: 1.25rem; display: inline-block;
-    line-height: 1;
-    transition: transform var(--t);
-  }
-  .service-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500; font-size: 1.55rem;
-    color: var(--stone); margin-bottom: 1rem;
-    line-height: 1.25;
-    letter-spacing: -0.005em;
-  }
-  .service-desc {
-    font-size: 0.9rem; color: var(--mid);
-    line-height: 1.85; font-weight: 300;
-  }
-  /* Special tint for "Green Buildings" — subtly sage */
-  .service-item:nth-child(5)::before { background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage) 100%); }
-  .service-item:nth-child(5):hover {
-    background: linear-gradient(180deg, rgba(159,175,145,0.08) 0%, var(--paper) 100%);
-  }
-
-  /* === Inspirations Gallery === */
-  .gallery-section {
-    margin-top: clamp(4rem, 7vw, 6rem);
-    padding-top: clamp(3rem, 5vw, 4rem);
-    border-top: 1px solid var(--line);
-  }
-  .gallery-intro {
-    max-width: 760px;
-    margin: 0 auto clamp(2.5rem, 4vw, 3.5rem);
-    text-align: center;
-  }
-  .gallery-intro .eyebrow {
-    justify-content: center;
-    margin-bottom: 1.25rem;
-  }
-  .gallery-intro h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    color: var(--stone);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  .gallery-intro h3 em {
-    font-style: italic;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: var(--warm);
-  }
-  .gallery-intro p {
-    font-size: 0.95rem;
-    color: var(--mid);
-    line-height: 1.85;
-    font-weight: 300;
-    margin: 0;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: clamp(1.25rem, 2.2vw, 1.75rem);
-  }
-  .gallery-card {
-    position: relative;
-    overflow: hidden;
-    background: var(--paper);
+  .pf-select {
+    -webkit-appearance: none; appearance: none;
+    padding: 0.65rem 2.8rem 0.65rem 1.1rem;
     border: 1px solid var(--line);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--t), box-shadow var(--t);
-    display: flex;
-    flex-direction: column;
-  }
-  .gallery-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
-  .gallery-media {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    background: var(--cream-warm);
-  }
-  .gallery-media img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.7s var(--ease-out), filter 0.5s var(--ease);
-  }
-  .gallery-card:hover .gallery-media img {
-    transform: scale(1.06);
-  }
-  .gallery-media::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 55%, rgba(20,18,15,0.55) 100%);
-    pointer-events: none;
-    opacity: 0.85;
-  }
-  .gallery-tag {
-    position: absolute; top: 0.85rem; left: 0.85rem;
-    z-index: 2;
-    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
-    font-weight: 600; color: #fff;
-    background: rgba(20,18,15,0.55);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    padding: 0.4rem 0.7rem;
-    border: 1px solid rgba(255,255,255,0.18);
+    background: var(--paper);
+    font-family: inherit; font-size: 0.85rem;
+    color: var(--stone); cursor: pointer;
+    min-width: 230px;
+    transition: border-color 0.2s;
     border-radius: 2px;
   }
-  .gallery-tag.green { background: rgba(107,124,94,0.85); }
-  .gallery-tag.gold  { background: rgba(185,138,79,0.92); }
-  .gallery-body {
-    padding: 1.4rem 1.5rem 1.6rem;
-    display: flex; flex-direction: column;
-    flex: 1;
-  }
-  .gallery-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: 1.4rem;
-    color: var(--stone);
-    line-height: 1.2;
-    margin-bottom: 0.3rem;
-    letter-spacing: -0.005em;
-  }
-  .gallery-meta {
-    font-size: 0.7rem; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--warm-deep);
-    font-weight: 600;
-    margin-bottom: 0.85rem;
-    display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap;
-  }
-  .gallery-meta .dot {
-    width: 3px; height: 3px; border-radius: 50%; background: var(--warm); opacity: 0.6;
-    display: inline-block;
-  }
-  .gallery-desc {
-    font-size: 0.85rem; color: var(--mid);
-    line-height: 1.75; font-weight: 300;
-    margin: 0;
+  .pf-select:hover, .pf-select:focus { border-color: var(--warm); outline: none; }
+  .pf-count {
+    margin-left: auto;
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--mid); font-weight: 500;
   }
 
-  @media (max-width: 560px) {
-    .gallery-grid { grid-template-columns: 1fr; }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 768px)  { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .portfolio-grid { grid-template-columns: 1fr; } }
+
+  .pf-card {
+    position: relative; overflow: hidden;
+    aspect-ratio: 4/3; cursor: pointer;
+    background: var(--cream-warm);
+  }
+  .pf-card img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.55s var(--ease-out);
+  }
+  .pf-card:hover img { transform: scale(1.07); }
+  .pf-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,10,6,0.88) 0%, rgba(14,10,6,0.12) 55%, transparent 100%);
+    opacity: 0; transition: opacity 0.3s ease;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.2rem 1rem;
+  }
+  .pf-card:hover .pf-card-overlay { opacity: 1; }
+  .pf-card-cat {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(185,138,79,0.95); font-weight: 600; margin-bottom: 0.35rem;
+  }
+  .pf-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400; color: #fff; line-height: 1.25;
+  }
+
+  /* === Portfolio Modal / Lightbox === */
+  .pf-modal {
+    position: fixed; inset: 0;
+    background: rgba(8,6,4,0.92);
+    z-index: 2000;
+    display: none;
+    align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .pf-modal.is-open { opacity: 1; }
+  .pf-modal-inner {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    max-width: 1160px; width: 95vw;
+    max-height: 88vh;
+    background: var(--paper);
+    position: relative; overflow: hidden;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.65);
+  }
+  .pf-close {
+    position: absolute; top: 0.85rem; right: 0.85rem; z-index: 10;
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(185,138,79,0.1); border: 1px solid rgba(185,138,79,0.3);
+    color: var(--warm); font-size: 1.05rem; cursor: pointer;
+    transition: background 0.2s, color 0.2s; border-radius: 2px;
+  }
+  .pf-close:hover { background: var(--warm); color: #fff; }
+  .pf-modal-left {
+    display: flex; flex-direction: column; overflow: hidden; min-height: 0;
+  }
+  .pf-featured { flex: 1; overflow: hidden; min-height: 0; }
+  .pf-featured img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pf-thumbs {
+    display: flex; gap: 5px; padding: 6px 8px;
+    background: rgba(12,10,8,0.88); flex-shrink: 0;
+    overflow-x: auto;
+  }
+  .pf-thumbs::-webkit-scrollbar { height: 3px; }
+  .pf-thumbs::-webkit-scrollbar-thumb { background: var(--warm); }
+  .pf-thumb {
+    width: 68px; height: 48px; flex-shrink: 0; overflow: hidden;
+    cursor: pointer; border: 2px solid transparent;
+    transition: border-color 0.2s, opacity 0.2s; opacity: 0.5;
+  }
+  .pf-thumb:hover { opacity: 0.82; }
+  .pf-thumb.active { border-color: var(--warm); opacity: 1; }
+  .pf-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pf-modal-right {
+    padding: clamp(1.75rem, 3vw, 2.5rem) 1.75rem;
+    display: flex; flex-direction: column; overflow-y: auto;
+    border-left: 1px solid var(--line);
+  }
+  .pf-modal-cat {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--warm); font-weight: 600; margin-bottom: 1rem;
+  }
+  .pf-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: clamp(1.55rem, 2.2vw, 2.1rem);
+    color: var(--stone); line-height: 1.2; margin-bottom: 1.25rem;
+  }
+  .pf-modal-meta {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    padding-bottom: 1.25rem; margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .pf-modal-meta-item { font-size: 0.82rem; color: var(--mid); font-weight: 300; }
+  .pf-modal-meta-item strong { color: var(--stone); font-weight: 500; }
+  .pf-modal-desc {
+    font-size: 0.9rem; color: var(--mid);
+    line-height: 1.85; font-weight: 300; flex: 1;
+  }
+  .pf-modal-nav {
+    display: flex; gap: 0.6rem;
+    margin-top: 1.75rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--line); flex-shrink: 0;
+  }
+  .pf-nav-btn {
+    flex: 1; padding: 0.6rem 0.5rem;
+    border: 1px solid var(--line); background: transparent;
+    font-family: inherit; font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--mid); cursor: pointer; transition: all 0.2s;
+  }
+  .pf-nav-btn:hover:not(:disabled) { background: var(--warm); border-color: var(--warm); color: #fff; }
+  .pf-nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+  @media (max-width: 860px) {
+    .pf-modal-inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: 50vw auto;
+      max-height: 95vh; width: 100vw;
+    }
+    .pf-modal-right { max-height: 45vh; }
   }
 
   /* === About === */
@@ -799,7 +812,51 @@
   }
   .about-section > * { max-width: var(--container); margin-left: auto; margin-right: auto; }
 
-  .about-intro { max-width: 740px; margin: 0 0 clamp(4rem, 8vw, 6rem) 0; }
+  .about-intro { max-width: 740px; margin: 0 0 clamp(2.5rem, 5vw, 4rem) 0; }
+
+  /* Services strip inside Who We Are */
+  .services-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+  }
+  .service-item {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--line);
+    transition: background var(--t);
+  }
+  .service-item:last-child { border-right: none; }
+  .service-item:hover { background: rgba(185,138,79,0.04); }
+  .service-num {
+    font-size: 0.68rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--warm);
+    font-weight: 600; margin-bottom: 0.9rem;
+  }
+  .service-name {
+    font-family: var(--serif); font-size: 1.05rem;
+    color: var(--ink); line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+  .service-desc {
+    font-size: 0.82rem; color: var(--stone-soft);
+    line-height: 1.65; font-weight: 300;
+  }
+  @media (max-width: 900px) {
+    .services-strip { grid-template-columns: repeat(3, 1fr); }
+    .service-item:nth-child(3) { border-right: none; }
+    .service-item:nth-child(4),
+    .service-item:nth-child(5) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 600px) {
+    .services-strip { grid-template-columns: 1fr 1fr; }
+    .service-item { border-right: none; border-bottom: 1px solid var(--line); }
+    .service-item:nth-child(odd) { border-right: 1px solid var(--line); }
+    .service-item:nth-child(3) { border-right: 1px solid var(--line); }
+    .service-item:last-child { border-bottom: none; }
+  }
   .about-intro p {
     font-size: 1.05rem; color: var(--stone-soft);
     line-height: 1.9; font-weight: 300;
@@ -1120,12 +1177,12 @@
   }
   .footer-brand { max-width: 460px; }
   .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: #fff; margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: #fff;
+    margin-bottom: 1rem;
   }
-  .footer-logo span { color: var(--warm); font-style: italic; }
   .footer-copy {
     font-size: 0.92rem; color: rgba(255,255,255,0.7);
     line-height: 1.85;
@@ -1177,6 +1234,12 @@
   /* === Responsive === */
   @media (max-width: 900px) {
     .nav-toggle { display: inline-flex; }
+    .logo-mark,
+    .footer-logo-mark { width: 48px; height: 48px; border-radius: 12px; }
+    .logo-copy strong,
+    .footer-logo-copy strong { font-size: 0.95rem; letter-spacing: 0.12em; }
+    .logo-copy span,
+    .footer-logo-copy span { font-size: 0.74rem; }
     .nav-links {
       position: fixed;
       top: 0; right: 0; bottom: 0;
@@ -1221,12 +1284,23 @@
     .hero::before, .hero::after { display: none; }
     .philosophy-strip::before { font-size: 14rem; left: 0.25rem; top: -1.5rem; }
     .page-header::before { width: 320px; height: 320px; right: -160px; top: -160px; }
+    .service-item {
+      grid-template-columns: 52px 1fr;
+      grid-template-rows: auto auto;
+    }
+    .service-desc { grid-column: 2 / -1; }
   }
 
   @media (max-width: 560px) {
+    .service-item { grid-template-columns: 48px 1fr; }
+    .service-desc { grid-column: 1 / -1; padding-top: 0.25rem; }
     .social-links { grid-template-columns: 1fr; }
     nav { padding: 0.9rem 1rem; }
-    .logo { font-size: 1rem; letter-spacing: 0.14em; }
+    .logo { gap: 0.7rem; }
+    .logo-mark,
+    .footer-logo-mark { width: 42px; height: 42px; border-radius: 11px; }
+    .logo-copy strong,
+    .footer-logo-copy strong { font-size: 0.9rem; letter-spacing: 0.11em; }
     .hero h1 { font-size: 2.5rem; }
     .hero-stats { gap: 1.75rem; }
     .stat-item .stat-num { font-size: 2rem; }
@@ -1470,14 +1544,18 @@
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <nav id="siteNav">
-    <a class="logo" href="#home" onclick="showSection('home'); return false;">Plankraft<span> International</span></a>
+    <a class="logo" href="#home" onclick="showSection('home'); return false;" aria-label="Plankraft International home">
+      <img class="logo-mark" src="logo.jpeg" alt="Plankraft International logo" width="56" height="56" decoding="async">
+      <span class="logo-copy"><strong>Plankraft</strong><span>International</span></span>
+      <span class="sr-only">Plankraft International</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="active" onclick="showSection('home', this); return false;">Home</a></li>
-      <li><a href="#what-we-do" onclick="showSection('what-we-do', this); return false;">What We Do</a></li>
       <li><a href="#who-we-are" onclick="showSection('who-we-are', this); return false;">Who We Are</a></li>
+      <li><a href="#what-we-do" onclick="showSection('what-we-do', this); return false;">What We Do</a></li>
       <li><a href="#contact-us" onclick="showSection('contact-us', this); return false;">Contact Us</a></li>
       <li class="nav-cta-wrap"><a class="nav-cta" href="#contact-us" onclick="showSection('contact-us', document.querySelector('.nav-links > li > a[href=\'#contact-us\']:not(.nav-cta)')); return false;">Get In Touch</a></li>
     </ul>
@@ -1513,209 +1591,51 @@
     </div>
   </section>
 
-  <section id="inspirations">
-    <div class="section-body">
-      <div class="gallery-section" id="inspirations">
-        <div class="gallery-intro">
-          <p class="eyebrow">Built in Kenya &mdash; For Kenya</p>
-          <h3>Architecture that <em>shapes us.</em></h3>
-          <p>A curated celebration of Kenya&rsquo;s architectural identity &mdash; from Nairobi&rsquo;s evolving skyline and the ancient coral towns of the Coast, to the award-winning eco-lodges of the Rift Valley and Maasai Mara. These landmarks inspire our work and deepen our commitment to design rooted in Kenyan place, climate, and culture.</p>
+  <section id="what-we-do">
+    <div class="page-header">
+      <p class="eyebrow">Our Practice</p>
+      <h2>What We Do</h2>
+    </div>
+    <div class="portfolio-wrap">
+      <div class="portfolio-filter-row">
+        <span class="pf-filter-label">Filter by</span>
+        <div class="pf-select-wrap">
+          <select class="pf-select" id="portfolioFilter">
+            <option value="all">All</option>
+            <option value="hospitality">Hospitality &amp; Leisure</option>
+            <option value="civil-culture">Civil &amp; Culture</option>
+            <option value="residential">Residential</option>
+            <option value="offices">Offices</option>
+            <option value="retail">Retail</option>
+            <option value="industrial">Industrial &amp; Transport</option>
+            <option value="mixed-use">Mixed Use</option>
+            <option value="education">Health &amp; Education</option>
+          </select>
         </div>
+        <span class="pf-count" id="pfCount">16 Projects</span>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+    </div>
 
-        <div class="gallery-grid">
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag gold">Civic</span>
-              <img src="gallery/ke-01-kicc.jpg" alt="Kenyatta International Conference Centre Nairobi" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Kenyatta International Conference Centre</div>
-              <div class="gallery-meta"><span>Karl Henrik Nostvik &middot; 1973</span><span class="dot"></span><span>Nairobi CBD, Kenya</span></div>
-              <p class="gallery-desc">Kenya&rsquo;s most iconic tower &mdash; a 28-storey drum-and-saucer composition that has defined the Nairobi skyline since independence. The revolving restaurant and helipad atop its cylindrical crown remain landmarks of post-colonial modernism in East Africa.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">High-Rise</span>
-              <img src="gallery/ke-02-nairobi-skyline.jpg" alt="Nairobi Upperhill skyline with glass towers" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Nairobi Upperhill District</div>
-              <div class="gallery-meta"><span>Various Architects &middot; 2005&ndash;present</span><span class="dot"></span><span>Upperhill, Nairobi</span></div>
-              <p class="gallery-desc">Africa&rsquo;s fastest-growing commercial precinct. Upperhill&rsquo;s curtain-wall towers &mdash; including the UAP Old Mutual Tower and Times Tower &mdash; reflect Kenya&rsquo;s emergence as the region&rsquo;s premier business hub, rising above the forest canopy of the Nairobi National Park.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Cultural</span>
-              <img src="gallery/ke-03-nairobi-museum.jpg" alt="Nairobi National Museum main building" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Nairobi National Museum</div>
-              <div class="gallery-meta"><span>Somers &amp; Partners &middot; 1929 &amp; 2008</span><span class="dot"></span><span>Museum Hill, Nairobi</span></div>
-              <p class="gallery-desc">Refurbished and expanded by Skidmore, Owings &amp; Merrill, the museum&rsquo;s contemporary wing wraps a new glass atrium around the colonial-era core. It anchors the museum hill cultural precinct and houses East Africa&rsquo;s most significant natural history and art collections.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Heritage</span>
-              <img src="gallery/ke-04-fort-jesus.jpg" alt="Fort Jesus Mombasa Portuguese coral walls" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Fort Jesus</div>
-              <div class="gallery-meta"><span>Jo&atilde;o Batista Cairato &middot; 1593</span><span class="dot"></span><span>Mombasa Island, Kenya</span></div>
-              <p class="gallery-desc">A UNESCO World Heritage Site, Fort Jesus is one of the finest examples of 16th-century Portuguese military architecture. Built of coral rag on the Mombasa headland, its bastions and angular plan reflect the geometric principles of the Italian architect Matteo Cipolla &mdash; an enduring symbol of the Swahili Coast&rsquo;s layered history.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag gold">Heritage</span>
-              <img src="gallery/ke-05-lamu.jpg" alt="Lamu Old Town coral stone buildings and narrow streets" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Lamu Old Town</div>
-              <div class="gallery-meta"><span>Swahili craftsmen &middot; 13th century onwards</span><span class="dot"></span><span>Lamu Island, Kenya</span></div>
-              <p class="gallery-desc">East Africa&rsquo;s oldest living town and a UNESCO World Heritage Site. Lamu&rsquo;s coral-stone architecture &mdash; with its elaborately carved wooden doors, inner courtyards, and natural ventilation strategies &mdash; represents one of the world&rsquo;s most sophisticated pre-industrial climate-responsive building traditions.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag gold">Commercial</span>
-              <img src="gallery/ke-06-nairobi-modern.jpg" alt="Modern Nairobi commercial development glass facades" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Two Rivers Mall</div>
-              <div class="gallery-meta"><span>Boogertman + Partners &middot; 2017</span><span class="dot"></span><span>Runda, Nairobi</span></div>
-              <p class="gallery-desc">East and Central Africa&rsquo;s largest mall at its opening &mdash; a 67,000&nbsp;m&sup2; mixed-use development set along the Kiambu Road corridor. Its design integrates open-air plazas, water features, and generous daylighting, drawing on Kenyan landscape and climate to create a destination rather than a box.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag green">Hospitality</span>
-              <img src="gallery/ke-07-kenya-resort.jpg" alt="Eco-lodge nestled in Kenyan savannah landscape" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Angama Mara Eco-Lodge</div>
-              <div class="gallery-meta"><span>Silvio Rech &amp; Lesley Carstens &middot; 2015</span><span class="dot"></span><span>Maasai Mara, Kenya</span></div>
-              <p class="gallery-desc">Suspended 300 metres above the Mara on the Great Rift Valley escarpment, Angama Mara&rsquo;s twin camps use tented glass-walled suites that dissolve the boundary between interior and landscape. Its architecture won international acclaim for environmental sensitivity and contextual design in a fragile ecosystem.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Institutional</span>
-              <img src="gallery/ke-08-africa-modern.jpg" alt="Aga Khan Academy Nairobi campus modern architecture" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Aga Khan Academy, Nairobi</div>
-              <div class="gallery-meta"><span>Dar al-Handasah Architects &middot; 2003</span><span class="dot"></span><span>Westlands, Nairobi</span></div>
-              <p class="gallery-desc">A flagship educational campus on 40 acres of Gigiri forest. The academy&rsquo;s buildings are arranged along natural contours, with shaded colonnades, planted roofs, and passive ventilation systems designed for Nairobi&rsquo;s equatorial climate &mdash; a model of how institutional architecture can respect landscape and community.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Commercial</span>
-              <img src="gallery/ke-09-nairobi-office.jpg" alt="Nairobi Westlands commercial office towers" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Westlands Commercial Hub</div>
-              <div class="gallery-meta"><span>Various Architects &middot; 1990&ndash;2020</span><span class="dot"></span><span>Westlands, Nairobi</span></div>
-              <p class="gallery-desc">The Westlands district has evolved into one of Africa&rsquo;s most dynamic commercial corridors. Delta House, Pinetree Centre, and the Parkside Towers demonstrate how Nairobi&rsquo;s private sector has driven a distinctly Kenyan vocabulary of curtain wall and mixed-use podium architecture adapted for equatorial light and monsoon rains.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag green">Residential</span>
-              <img src="gallery/ke-10-africa-villa.jpg" alt="Luxury Nairobi Karen residential villa with tropical gardens" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Karen Residential Villas</div>
-              <div class="gallery-meta"><span>Various Architects &middot; 2000&ndash;present</span><span class="dot"></span><span>Karen, Nairobi</span></div>
-              <p class="gallery-desc">Nairobi&rsquo;s leafy Karen suburb &mdash; named after Karen Blixen &mdash; has become the setting for some of Kenya&rsquo;s finest contemporary residential architecture. Stone-clad homes with wide verandahs, planted courtyards, and natural swimming ponds reflect a distinctly Kenyan aesthetic that balances privacy, nature, and indoor-outdoor living.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag gold">Interiors</span>
-              <img src="gallery/ke-11-kenya-interior.jpg" alt="Contemporary Kenyan interior design with natural materials" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Kenyan Contemporary Interiors</div>
-              <div class="gallery-meta"><span>Kenyan Design Studios &middot; 2010&ndash;present</span><span class="dot"></span><span>Nairobi, Kenya</span></div>
-              <p class="gallery-desc">A new generation of Nairobi-based interior designers has built a global reputation for spaces that weave together Kenyan craftsmanship, natural materials &mdash; sisal, olive wood, hand-woven textiles &mdash; and contemporary spatial sensibility. Their work is increasingly commissioned from London to New York.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag green">Green</span>
-              <img src="gallery/ke-12-kenya-green.jpg" alt="Green building with planted terraces and solar panels in Nairobi" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Nairobi Green Building Standard</div>
-              <div class="gallery-meta"><span>Kenya Green Building Society &middot; 2011&ndash;present</span><span class="dot"></span><span>Nairobi, Kenya</span></div>
-              <p class="gallery-desc">Kenya is East Africa&rsquo;s leader in green building certification. From solar-powered schools in Kibera to LEED-certified corporate campuses in Upperhill, Kenyan architects and developers are demonstrating that environmental responsibility and commercial success are not in conflict &mdash; they are inseparable.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Infrastructure</span>
-              <img src="gallery/ke-13-nairobi-road.jpg" alt="Nairobi Expressway modern elevated road infrastructure" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Nairobi Expressway</div>
-              <div class="gallery-meta"><span>China Road &amp; Bridge Corp. &middot; 2022</span><span class="dot"></span><span>Nairobi, Kenya</span></div>
-              <p class="gallery-desc">The 27-kilometre elevated Nairobi Expressway &mdash; connecting JKIA to Westlands &mdash; is the largest infrastructure project in Kenya&rsquo;s history. Its sinuous elevated deck, designed to minimise land acquisition while threading through a dense urban fabric, has reshaped the experience of moving through East Africa&rsquo;s largest city.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag gold">Cultural</span>
-              <img src="gallery/ke-14-africa-archi.jpg" alt="African modernist civic architecture with bold geometric forms" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Bomas of Kenya</div>
-              <div class="gallery-meta"><span>Government of Kenya &middot; 1971</span><span class="dot"></span><span>Langata, Nairobi</span></div>
-              <p class="gallery-desc">A cultural village designed to preserve and celebrate the diverse homestead traditions of Kenya&rsquo;s 42-plus ethnic communities. The main Harambee Arena &mdash; with its 3,500-seat open-air amphitheatre &mdash; reflects a deliberate post-independence architectural agenda to honour indigenous spatial and material cultures.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag green">Hospitality</span>
-              <img src="gallery/ke-15-safari-lodge.jpg" alt="Luxury tented safari lodge overlooking Kenyan landscape" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Rift Valley Tented Lodges</div>
-              <div class="gallery-meta"><span>Various Architects &middot; 1990&ndash;present</span><span class="dot"></span><span>Rift Valley &amp; Laikipia, Kenya</span></div>
-              <p class="gallery-desc">Kenya&rsquo;s world-renowned safari lodge tradition has become a benchmark for luxury eco-architecture globally. From Laikipia&rsquo;s Ol Malo to Lewa&rsquo;s Ekorian&rsquo;s Mugie, these structures &mdash; raised on slender steel legs, clad in canvas and local timber &mdash; achieve near-zero footprint while creating some of the world&rsquo;s most extraordinary guest experiences.</p>
-            </div>
-          </article>
-
-          <article class="gallery-card reveal-card">
-            <div class="gallery-media">
-              <span class="gallery-tag">Civic</span>
-              <img src="gallery/ke-16-kenya-home.jpg" alt="Affordable housing development modern Kenya" loading="lazy">
-            </div>
-            <div class="gallery-body">
-              <div class="gallery-title">Kenya Affordable Housing Programme</div>
-              <div class="gallery-meta"><span>Various Architects &middot; 2018&ndash;present</span><span class="dot"></span><span>Nairobi &amp; Nationwide, Kenya</span></div>
-              <p class="gallery-desc">Kenya&rsquo;s 500,000-unit affordable housing agenda is reshaping how architects think about mass housing. Projects in Park Road Ngara, Starehe, and Shauri Moyo demonstrate that dignified, well-designed homes at scale are achievable with the right integration of community input, modular construction, and thoughtful landscape planning.</p>
-            </div>
-          </article>
-
+    <div class="pf-modal" id="pfModal">
+      <div class="pf-modal-inner">
+        <button class="pf-close" id="pfClose" aria-label="Close preview">&#x2715;</button>
+        <div class="pf-modal-left">
+          <div class="pf-featured"><img id="pfMainImg" src="" alt=""></div>
+          <div class="pf-thumbs" id="pfThumbs"></div>
+        </div>
+        <div class="pf-modal-right">
+          <div class="pf-modal-cat" id="pfModalCat"></div>
+          <h3 class="pf-modal-title" id="pfModalTitle"></h3>
+          <div class="pf-modal-meta">
+            <p class="pf-modal-meta-item" id="pfModalLoc"></p>
+            <p class="pf-modal-meta-item" id="pfModalYear"></p>
+          </div>
+          <p class="pf-modal-desc" id="pfModalDesc"></p>
+          <div class="pf-modal-nav">
+            <button class="pf-nav-btn" id="pfPrev">&#8592; Prev</button>
+            <button class="pf-nav-btn" id="pfNext">Next &#8594;</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1731,6 +1651,35 @@
         <p>Plankraft International is a design practice founded on the conviction that architecture is one of the most consequential acts of human creativity. We are a lean, focused studio &mdash; built on talent, not scale &mdash; where each project receives the full weight of our collective expertise and personal investment.</p>
         <p>We operate at the intersection of design rigour and practical delivery, bridging the conceptual and the constructed with equal fluency. Our team brings diverse strengths to every commission: from the precision of BIM workflows to the tactile craft of physical model-making, from the sweep of strategic planning to the discipline of on-site execution.</p>
         <p>We believe the best architecture emerges from curiosity, collaboration, and an uncompromising commitment to craft &mdash; and we bring all three to every project we touch.</p>
+      </div>
+
+      <div class="team-label">Our Services</div>
+      <div class="services-strip">
+        <div class="service-item">
+          <div class="service-num">01</div>
+          <div class="service-name">Architectural Design</div>
+          <div class="service-desc">Concept through construction — residential, commercial, civic, and hospitality projects designed with rigour and creativity at every scale.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">02</div>
+          <div class="service-name">Interior Design</div>
+          <div class="service-desc">Spatial planning and material storytelling that translate architectural intent into fully resolved interior environments, from single rooms to entire buildings.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">03</div>
+          <div class="service-name">Urban & Master Planning</div>
+          <div class="service-desc">Large-scale frameworks for townships, corridors, and precincts — balancing density, movement, green space, and community infrastructure.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">04</div>
+          <div class="service-name">Project Management</div>
+          <div class="service-desc">End-to-end delivery oversight encompassing programme, budget, procurement, contractor coordination, and client reporting from inception to handover.</div>
+        </div>
+        <div class="service-item">
+          <div class="service-num">05</div>
+          <div class="service-name">Construction Supervision</div>
+          <div class="service-desc">On-site architectural supervision ensuring design intent, material quality, and workmanship standards are preserved through every phase of construction.</div>
+        </div>
       </div>
 
       <div class="team-label">Our Architects</div>
@@ -1869,7 +1818,11 @@
   <footer class="site-footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <p class="footer-logo">Plankraft<span> International</span></p>
+        <a class="footer-logo" href="#home" onclick="showSection('home'); return false;" aria-label="Plankraft International home">
+          <img class="footer-logo-mark" src="logo.jpeg" alt="Plankraft International logo" width="56" height="56" decoding="async">
+          <span class="footer-logo-copy"><strong>Plankraft</strong><span>International</span></span>
+          <span class="sr-only">Plankraft International</span>
+        </a>
         <p class="footer-copy">Designing architecture, interiors, and planning solutions with precision, character, and long-term value. We create spaces that work beautifully in daily life and endure over time.</p>
       </div>
 
@@ -1877,8 +1830,8 @@
         <p class="footer-title">Quick Links</p>
         <ul class="footer-list">
           <li><a href="#" onclick="showSection('home', document.querySelector('.nav-links a[onclick*=home]')); return false;">Home</a></li>
-          <li><a href="#" onclick="showSection('what-we-do', document.querySelector('.nav-links a[onclick*=what-we-do]')); return false;">What We Do</a></li>
           <li><a href="#" onclick="showSection('who-we-are', document.querySelector('.nav-links a[onclick*=who-we-are]')); return false;">Who We Are</a></li>
+          <li><a href="#" onclick="showSection('what-we-do', document.querySelector('.nav-links a[onclick*=what-we-do]')); return false;">What We Do</a></li>
           <li><a href="#" onclick="showSection('contact-us', document.querySelector('.nav-links a[onclick*=contact-us]')); return false;">Contact Us</a></li>
         </ul>
       </div>
@@ -1909,6 +1862,36 @@
 
 <script>
   const destinationAddress = 'Masta Villa Plaza, Highpoint, Juja, Kenya';
+
+  (function setupBrandAssets() {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    if (!head) return;
+
+    const links = [
+      { rel: 'icon', href: 'logo.jpeg', type: 'image/jpeg' },
+      { rel: 'shortcut icon', href: 'logo.jpeg', type: 'image/jpeg' },
+      { rel: 'apple-touch-icon', href: 'logo.jpeg', type: 'image/jpeg' }
+    ];
+
+    links.forEach(function (config) {
+      let link = head.querySelector('link[rel="' + config.rel + '"]');
+      if (!link) {
+        link = document.createElement('link');
+        head.appendChild(link);
+      }
+      link.rel = config.rel;
+      link.href = config.href;
+      link.type = config.type;
+    });
+
+    let themeColor = head.querySelector('meta[name="theme-color"]');
+    if (!themeColor) {
+      themeColor = document.createElement('meta');
+      themeColor.name = 'theme-color';
+      head.appendChild(themeColor);
+    }
+    themeColor.content = '#25221E';
+  })();
 
   function buildDirectionsEmbed(origin) {
     return 'https://www.google.com/maps?output=embed&saddr=' + encodeURIComponent(origin) + '&daddr=' + encodeURIComponent(destinationAddress) + '&dirflg=d';
@@ -2108,13 +2091,217 @@
     };
   })();
 
-  // === Staggered gallery card delay ===
+  // === Portfolio (What We Do) — filter + lightbox ===
   (function () {
-    document.querySelectorAll('.gallery-grid .reveal-card').forEach(function (card, i) {
-      card.dataset.delay = (i % 4) * 90;
+    var PROJECTS = [
+
+      /* ── HOSPITALITY & LEISURE (12) ── */
+      { title: "Ol Pejeta Wilderness Camp", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Laikipia, Kenya", year: "2022", images: ["gallery/ke-07-kenya-resort.jpg"], desc: "Nine canvas-and-steel pavilions on elevated timber decks above the Ewaso Ng’iro floodplain. Passive cross-ventilation, grey-water recycling and 100% solar power underpin a net-zero operational footprint on this celebrated rhino conservancy." },
+      { title: "Diani Reef Beach Club", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Diani, Kwale", year: "2023", images: ["gallery/ke-15-safari-lodge.jpg"], desc: "A 48-key beach resort designed around a continuous wave-form concrete roof that shades the central spine and opens to infinity pools and the Indian Ocean. A zero-runoff rain garden manages all storm water on-site." },
+      { title: "Mara Nyika Tented Camp", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Maasai Mara, Kenya", year: "2021", images: ["gallery/ke-07-kenya-resort.jpg"], desc: "Seven super-tented suites on a kopje overlooking the Mara triangle, each with full-height glass gable ends, a private plunge pool and structural insulated panel walls that maintain interior comfort without mechanical cooling." },
+      { title: "Sasaab Desert River Camp", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Samburu, Kenya", year: "2022", images: ["gallery/ke-05-lamu.jpg"], desc: "An eight-suite luxury camp on a cliff above the Ewaso Nyiro River drawing on North African courtyard principles. Lime-washed rammed-earth walls, zellige tile water features and open-air sleeping terraces frame panoramic views over the Samburu reserve." },
+      { title: "Hemingways Nairobi Boutique Hotel", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Westlands, Nairobi", year: "2019", images: ["gallery/ke-11-kenya-interior.jpg"], desc: "A 45-suite urban retreat in a converted colonial residence. Polished concrete floors, bespoke Kenyan-craft furniture and a courtyard infinity pool layer over the original load-bearing stone walls, expressing a confidently modern spatial language." },
+      { title: "Watamu Marine Eco-Lodge", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Watamu, Kilifi", year: "2022", images: ["gallery/ke-07-kenya-resort.jpg"], desc: "Eight villas embedded within a rehabilitated coastal dune system, each elevated on micro-pile foundations to preserve root structures. Expanded-mesh facades create dappled interiors while photovoltaic-integrated roof panels meet 100% of energy demand." },
+      { title: "Kilifi Creek Water Villas", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Kilifi, Kenya", year: "2020", images: ["gallery/ke-05-lamu.jpg"], desc: "Six over-water bungalows on stilts in the Kilifi Creek mangrove channel, with glass floor panels revealing the water below and folding mesh screens providing unobstructed views while eliminating insect ingress without chemicals." },
+      { title: "Radisson Blu Nairobi — Vertical Garden", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Upperhill, Nairobi", year: "2023", images: ["gallery/ke-11-kenya-interior.jpg"], desc: "A 250-key business hotel in a 22-storey slim tower distinguished by its 4,000 m² vertical garden facade maintained by a grey-water cascade system. The lobby atrium with a 15 m planted void sets the biophilic tone throughout." },
+      { title: "Amboseli Glass Pavilion Lodge", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Amboseli, Kenya", year: "2023", images: ["gallery/ke-15-safari-lodge.jpg"], desc: "Six triple-aspect glass pavilions on concrete plinths, each framing Kilimanjaro through floor-to-ceiling glazing on three elevations. Thermally massive concrete floors and automated louvre systems manage heat gain with zero mechanical cooling." },
+      { title: "Four Points by Sheraton Nairobi", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Westlands, Nairobi", year: "2022", images: ["gallery/ke-11-kenya-interior.jpg"], desc: "A 180-room contemporary hotel occupying levels 4–18 of a mixed-use podium tower. The guestroom stack is sheathed in a double-skin ETFE cushion facade that reduces solar heat gain by 40% while allowing panoramic views of the Ngong Hills." },
+      { title: "Nairobi Arboretum Pavilion Hotel", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Westlands, Nairobi", year: "2021", images: ["gallery/ke-07-kenya-resort.jpg"], desc: "A 60-key boutique hotel whose guest pavilions are dispersed through a four-acre arboretum garden. Steel-framed glass boxes with motorised external timber louvres allow each room to be tuned between full transparency and complete privacy." },
+      { title: "Lewa Plains Camp Redesign", category: "hospitality", catLabel: "Hospitality & Leisure", location: "Lewa, Kenya", year: "2022", images: ["gallery/ke-15-safari-lodge.jpg"], desc: "A full redesign replacing original canvas with a structural PTFE membrane stretched over CNC-bent steel frames. The new tent forms are aerodynamically optimised for the plateau wind, eliminating mechanical ventilation entirely." },
+
+      /* ── CIVIL & CULTURE (12) ── */
+      { title: "Kenya National Digital Library", category: "civil-culture", catLabel: "Civil & Culture", location: "CBD, Nairobi", year: "2022", images: ["gallery/ke-03-nairobi-museum.jpg"], desc: "A 28,000 m² civic library designed as a stack of cantilevered concrete floor plates with landscaped reading gardens between levels. A double-skin facade of perforated anodised aluminium panels diffuses equatorial sunlight into warm shadow-patterned reading spaces." },
+      { title: "Nairobi Contemporary Art Museum", category: "civil-culture", catLabel: "Civil & Culture", location: "Westlands, Nairobi", year: "2023", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A 12,000 m² art institution whose plan traces the curves of the Nairobi River. The concrete shell, cast with a bush-hammered finish that changes texture with the angle of light, houses five galleries, a 300-seat auditorium and a public sculpture courtyard." },
+      { title: "Kenya Supreme Court Building", category: "civil-culture", catLabel: "Civil & Culture", location: "CBD, Nairobi", year: "2010", images: ["gallery/ke-01-kicc.jpg"], desc: "A landmark 15,000 m² civic building anchoring Constitutional Hill. The massive granite-clad podium supports a transparent glass upper level that signals constitutional openness, making the highest court physically legible to every citizen." },
+      { title: "Kisumu Civic & Culture Centre", category: "civil-culture", catLabel: "Civil & Culture", location: "Kisumu, Kenya", year: "2021", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A combined county assembly, library and cultural centre on a Lake Victoria waterfront site. The building's curvilinear plan responds to the lake edge; its lakeward face is clad in a solar-responsive brise-soleil of recycled aluminium fins." },
+      { title: "Mombasa Marine Science Museum", category: "civil-culture", catLabel: "Civil & Culture", location: "Mombasa, Kenya", year: "2023", images: ["gallery/ke-04-fort-jesus.jpg"], desc: "A dramatic cantilevered glass box projecting 12 m over the sea and housing a 1,000,000-litre live reef aquarium viewable both from inside the museum and from the public boardwalk below." },
+      { title: "Nakuru Civic Centre", category: "civil-culture", catLabel: "Civil & Culture", location: "Nakuru, Kenya", year: "2023", images: ["gallery/ke-01-kicc.jpg"], desc: "A civic campus of three interconnected buildings around a central public square for Kenya's newest city. Precast concrete panels cast with patterns derived from Lake Nakuru's flamingo formations unify the assembly hall, library and county government offices." },
+      { title: "Eldoret Arts & Culture Centre", category: "civil-culture", catLabel: "Civil & Culture", location: "Eldoret, Kenya", year: "2022", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A 7,000 m² performing arts and exhibition complex anchored by a 500-seat acoustic concert hall with a suspended timber diffuser ceiling. The public forecourt is designed as a hard-soft landscape capable of hosting outdoor performances for 2,000 people." },
+      { title: "Kakamega Rainforest Interpretive Centre", category: "civil-culture", catLabel: "Civil & Culture", location: "Kakamega, Kenya", year: "2023", images: ["gallery/ke-03-nairobi-museum.jpg"], desc: "A visitor and research facility at the edge of Kenya's only equatorial rainforest, built from green-oak timbers sourced from certified plantations. A canopy walkway carries visitors from the exhibition space into the forest crown at 18 m elevation." },
+      { title: "Turkana Basin Institute Research Centre", category: "civil-culture", catLabel: "Civil & Culture", location: "Turkana, Kenya", year: "2024", images: ["gallery/ke-04-fort-jesus.jpg"], desc: "A field research campus at the cradle of humanity, designed for extreme heat and dust. Brise-soleil-shaded pavilions around a central water garden are built from compressed-earth blocks made on site from local red sandy soil." },
+      { title: "Nairobi Open-Air Amphitheatre", category: "civil-culture", catLabel: "Civil & Culture", location: "Uhuru Park, Nairobi", year: "2022", images: ["gallery/ke-01-kicc.jpg"], desc: "A 2,500-seat performance bowl formed from terraced gabion-wall seating banks embedded in the Uhuru Park landscape. The acoustic shell is a parametrically designed timber lattice, each member individually angled to direct sound toward the audience." },
+      { title: "Machakos Peoples Museum", category: "civil-culture", catLabel: "Civil & Culture", location: "Machakos, Kenya", year: "2023", images: ["gallery/ke-03-nairobi-museum.jpg"], desc: "A cultural museum celebrating Kamba art and history, designed around a spiralling external ramp ascending through three levels of exhibition space. Carved concrete referencing traditional Kamba decorative patterns articulates the building at an architectural scale." },
+      { title: "Lamu New Administrative Centre", category: "civil-culture", catLabel: "Civil & Culture", location: "Lamu, Kenya", year: "2023", images: ["gallery/ke-05-lamu.jpg"], desc: "A government centre interpreting the Swahili architectural tradition in contemporary terms: lime-rendered concrete walls, deep-set arched openings and carved grille screens in laser-cut aluminium echoing traditional Swahili wood-carving motifs." },
+
+      /* ── RESIDENTIAL (14) ── */
+      { title: "One Runda — Private Residences", category: "residential", catLabel: "Residential", location: "Runda, Nairobi", year: "2023", images: ["gallery/ke-10-africa-villa.jpg"], desc: "Eight large-format contemporary villas on a ridge overlooking the Karura Forest, each with an exposed concrete structure, frameless glass enclosure and cascading private terraces stepping down the slope. Geothermal heat pumps make each home energy self-sufficient." },
+      { title: "The Muthaiga Collection", category: "residential", catLabel: "Residential", location: "Muthaiga, Nairobi", year: "2022", images: ["gallery/ke-10-africa-villa.jpg"], desc: "Six bespoke homes in Nairobi's most prestigious enclave, each designed around a different formal theme and unified by a shared palette of local travertine, oiled teak and polished concrete." },
+      { title: "Kilimani Sky Residences", category: "residential", catLabel: "Residential", location: "Kilimani, Nairobi", year: "2023", images: ["gallery/ke-16-kenya-home.jpg"], desc: "A slender 28-storey residential tower whose floor plates rotate 2.5° at every level, creating a subtle helical silhouette. Each apartment has a full wraparound loggia shielded by ceramic brise-soleil fins custom-printed with Kanga textile patterns." },
+      { title: "The Westlands Collective", category: "residential", catLabel: "Residential", location: "Westlands, Nairobi", year: "2022", images: ["gallery/ke-16-kenya-home.jpg"], desc: "Sixty-two apartments in two perforated bars around a shared courtyard containing a 25 m pool, co-working pavilion and planted communal garden. The south-facing perforated concrete screens balance shade and light for indoor plant growth." },
+      { title: "Lavington River House", category: "residential", catLabel: "Residential", location: "Lavington, Nairobi", year: "2022", images: ["gallery/ke-10-africa-villa.jpg"], desc: "A single large family home suspended above the Nairobi River on a reinforced concrete bridge-beam, with a glass-floored lower level that allows the river to flow visibly beneath the living spaces. Reclaimed timber from demolished railway structures lines all interior walls." },
+      { title: "Nyali Ocean Residences", category: "residential", catLabel: "Residential", location: "Nyali, Mombasa", year: "2023", images: ["gallery/ke-10-africa-villa.jpg"], desc: "Fourteen beach-facing apartments and six penthouses in a sculptural concrete tower, the sea-facing facade articulated as deep-set loggias shielded by laser-cut aluminium screens referencing traditional Swahili carved coral grille work." },
+      { title: "Naisula — Karen Private Estate", category: "residential", catLabel: "Residential", location: "Karen, Nairobi", year: "2022", images: ["gallery/ke-10-africa-villa.jpg"], desc: "A carbon-negative estate of eight homes in a 40-acre indigenous garden. Each dwelling is built from rammed earth, hempcrete and FSC-certified timber, with rooftop photovoltaics oversizing energy production to charge two electric vehicles per household." },
+      { title: "Kileleshwa Courtyard Apartments", category: "residential", catLabel: "Residential", location: "Kileleshwa, Nairobi", year: "2023", images: ["gallery/ke-16-kenya-home.jpg"], desc: "Forty units organised as interlocking courtyard sections at different levels, creating a vertical garden city effect where residents access their homes through planted terraced landscapes rather than conventional corridors." },
+      { title: "Ruaka Hilltop Residences", category: "residential", catLabel: "Residential", location: "Ruaka, Nairobi", year: "2023", images: ["gallery/ke-16-kenya-home.jpg"], desc: "A 120-unit affordable apartment development with community-first design: shared allotment gardens on the podium, a communal laundry, a children's farm and a social hall that doubles as a remote-work hub." },
+      { title: "Nanyuki Countryside Estate", category: "residential", catLabel: "Residential", location: "Nanyuki, Kenya", year: "2023", images: ["gallery/ke-10-africa-villa.jpg"], desc: "Twelve Mount Kenya-facing holiday and retirement homes on a tea estate, arranged in a loose hamlet plan with shared communal fields. Local hand-hewn stone and cedar shingle roofs reference the highland farmhouse vernacular without pastiche." },
+      { title: "Diani Beachfront Villas", category: "residential", catLabel: "Residential", location: "Diani, Kwale", year: "2022", images: ["gallery/ke-10-africa-villa.jpg"], desc: "Six luxury villas within 50 m of the Diani shoreline, each with a private infinity pool at grade and a 5 m-wide shaded verandah. Photovoltaics fully power each villa; a shared desalination plant provides all water." },
+      { title: "Kisumu Lakeside Apartments", category: "residential", catLabel: "Residential", location: "Kisumu, Kenya", year: "2023", images: ["gallery/ke-16-kenya-home.jpg"], desc: "A 250-unit mixed-income complex on the Lake Victoria waterfront, designed as a cascade of planted terraces stepping down to the lake edge. Ground-floor aquaponic gardens produce food for resident families year-round." },
+      { title: "Syokimau Connect Residences", category: "residential", catLabel: "Residential", location: "Syokimau, Nairobi", year: "2023", images: ["gallery/ke-16-kenya-home.jpg"], desc: "A transit-oriented development of 350 units adjacent to the Syokimau SGR station, with massing fingers angled toward the platform and a ground-level marketplace and commuter waiting hall integrated into the building podium." },
+      { title: "Kiambu Ridge Villas", category: "residential", catLabel: "Residential", location: "Kiambu, Kenya", year: "2024", images: ["gallery/ke-10-africa-villa.jpg"], desc: "Ten contemporary family homes on a tea estate ridge, each with a photovoltaic-covered car port, rainwater collection cistern and a green roof. All homes are fully BIM-modelled, enabling predictive energy performance simulation before breaking ground." },
+
+      /* ── OFFICES (12) ── */
+      { title: "One Upperhill Tower", category: "offices", catLabel: "Offices", location: "Upperhill, Nairobi", year: "2024", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "Nairobi's most ambitious contemporary office tower at 45 storeys, with a diagrid exoskeleton of structural steel tubes that eliminates internal columns, delivering 4,200 m² of unobstructed floor plates. Building-integrated PV within the diagrid panels generates 15% of energy demand." },
+      { title: "The Exchange — Westlands", category: "offices", catLabel: "Offices", location: "Westlands, Nairobi", year: "2023", images: ["gallery/ke-09-nairobi-office.jpg"], desc: "A 30-storey Grade A office tower designed around a central multi-storey atrium functioning as a shared sky lobby at every sixth floor. The atrium's vertical gardens cool and humidify the building's central air supply passively." },
+      { title: "The Pinnacle — Nairobi", category: "offices", catLabel: "Offices", location: "Upperhill, Nairobi", year: "2024", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A 50-storey supertall office tower designed as Kenya's tallest building, with a tapering circular floor plan that reduces wind-induced vortex shedding without mechanical damping. A public viewing gallery at level 46 offers Nairobi's highest publicly accessible vantage point." },
+      { title: "Nairobi Greens Corporate Park", category: "offices", catLabel: "Offices", location: "Upperhill, Nairobi", year: "2023", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A net-zero office campus of four interconnected low-rise blocks around interconnected garden courtyards. All 60,000 m² is naturally ventilated; the BMS uses ML-trained algorithms to predict and pre-condition the internal environment in real time." },
+      { title: "The Arc — Westlands", category: "offices", catLabel: "Offices", location: "Westlands, Nairobi", year: "2024", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A curved 28-storey office tower whose plan traces a 90-degree arc, allowing all offices to face outward. The concave inner face creates a sheltered microclimate that reduces cooling loads on the concave glazed elevation by a verified 22%." },
+      { title: "Upperhill Financial Centre", category: "offices", catLabel: "Offices", location: "Upperhill, Nairobi", year: "2024", images: ["gallery/ke-09-nairobi-office.jpg"], desc: "A 35-storey financial services headquarters with a triple-height public trading floor, rooftop helipad and three sky gardens distributed through the section. The primary structure is hybrid steel-timber, reducing embodied carbon by 38% versus an all-concrete equivalent." },
+      { title: "Nairobi Digital Campus", category: "offices", catLabel: "Offices", location: "Westlands, Nairobi", year: "2023", images: ["gallery/ke-09-nairobi-office.jpg"], desc: "A 10-storey creative office building designed as an extrusion of a modular grid — each 12 m x 12 m bay independently structural, allowing floors to be added, removed or relocated as tenants' needs evolve over the building's design life." },
+      { title: "Mombasa Port Office Complex", category: "offices", catLabel: "Offices", location: "Mombasa, Kenya", year: "2024", images: ["gallery/ke-06-nairobi-modern.jpg"], desc: "A gateway building for the Kenya Ports Authority that frames the view into Kilindini Harbour. Its perforated aluminium screen, patterned with the rigging of a traditional dhow, shades the offices while remaining fully transparent from inside at night." },
+      { title: "Nairobi Finance Centre", category: "offices", catLabel: "Offices", location: "Upperhill, Nairobi", year: "2024", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A Pan-African development bank headquarters designed as a transparent public institution. The full-height glazed ground floor is open to the public as a cafe, event space and financial literacy resource centre, deliberately blurring the boundary between institution and city." },
+      { title: "Gigiri UN Office Extension", category: "offices", catLabel: "Offices", location: "Gigiri, Nairobi", year: "2023", images: ["gallery/ke-09-nairobi-office.jpg"], desc: "A 25,000 m² extension to the United Nations Nairobi campus designed to achieve UN P2050 net-zero carbon standards. Cross-laminated timber floors reduce embodied carbon; a 2 MW rooftop solar array generates 100% of operating energy." },
+      { title: "Riverside Corporate Campus", category: "offices", catLabel: "Offices", location: "Riverside Drive, Nairobi", year: "2024", images: ["gallery/ke-09-nairobi-office.jpg"], desc: "A 65,000 m² corporate campus for Kenya's largest bank, with three towers of 25, 20 and 15 storeys. The campus includes a public art trail, a riverside park open to the neighbourhood and a branch banking hall designed as a transparent public room." },
+      { title: "Konza Smart City Offices Phase 1", category: "offices", catLabel: "Offices", location: "Konza, Machakos", year: "2023", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "First commercial buildings within Kenya's purpose-built smart city, designed with 15 m structural grids, raised access floors and BIM-coordinated fit-out systems capable of accommodating data-centre co-location, standard offices or light-manufacturing uses." },
+
+      /* ── RETAIL (10) ── */
+      { title: "The Yard — Nairobi Creative Market", category: "retail", catLabel: "Retail", location: "Kilimani, Nairobi", year: "2023", images: ["gallery/ke-06-nairobi-modern.jpg"], desc: "A 15,000 m² open-air creative market and F&B destination in a repurposed industrial compound, with light-touch steel and glass insertions creating market stalls and a rooftop cinema around a retained brick chimney and water tower." },
+      { title: "Karen Court Lifestyle Centre", category: "retail", catLabel: "Retail", location: "Karen, Nairobi", year: "2022", images: ["gallery/ke-06-nairobi-modern.jpg"], desc: "A 12,000 m² neighbourhood lifestyle centre designed at a village scale. Three low-rise buildings in locally quarried stone are arranged around a shaded marketplace courtyard; a generous food hall occupies the sheltered northern edge." },
+      { title: "Muthaiga Retail Arcade", category: "retail", catLabel: "Retail", location: "Muthaiga, Nairobi", year: "2024", images: ["gallery/ke-11-kenya-interior.jpg"], desc: "An elegant 4,000 m² specialty retail arcade with shops along a covered pedestrian lane of polished granite and steel. The arched glazed roof draws on the Galleria typology, creating a rain-protected promenade as much as a shopping route." },
+      { title: "Kisumu Market Hall", category: "retail", catLabel: "Retail", location: "Kisumu, Kenya", year: "2023", images: ["gallery/ke-06-nairobi-modern.jpg"], desc: "A 10,000 m² central market building with a dramatic clear-span steel-and-timber roof, separate wet and dry market halls, refrigerated cold stores and a 1,500 m² rooftop solar array that powers all common services." },
+      { title: "Nakuru City Market Hall", category: "retail", catLabel: "Retail", location: "Nakuru, Kenya", year: "2022", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A modern market hall designed as a series of interconnected domed precast concrete structures, each dome enclosing a distinct market category. The profile echoes the rounded summit of Mount Longonot visible from the site." },
+      { title: "Ongata Rongai Lifestyle Centre", category: "retail", catLabel: "Retail", location: "Ongata Rongai, Kajiado", year: "2022", images: ["gallery/ke-06-nairobi-modern.jpg"], desc: "A 25,000 m² community mall anchored by a hypermarket and 8-screen cinema. The building's market-hall character — exposed steel roof, natural ventilation, ground-level food court — differentiates it sharply from a conventional enclosed mall." },
+      { title: "Eldoret Fashion Mall", category: "retail", catLabel: "Retail", location: "Eldoret, Kenya", year: "2024", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A 40,000 m² regional fashion and lifestyle mall with a glazed arcade spine connecting two anchor stores. The main entrance is a six-storey glazed atrium — the first such internal public space in Eldoret, now an immediate city landmark." },
+      { title: "Mombasa Old Port Retail Walk", category: "retail", catLabel: "Retail", location: "Mombasa, Kenya", year: "2024", images: ["gallery/ke-04-fort-jesus.jpg"], desc: "A waterfront retail promenade in the Mombasa Old Port with 60 shops, restaurants and galleries in single-storey buildings that defer to the adjacent colonial-era warehouses in height and bay rhythm." },
+      { title: "Upperhill Retail Podium", category: "retail", catLabel: "Retail", location: "Upperhill, Nairobi", year: "2022", images: ["gallery/ke-06-nairobi-modern.jpg"], desc: "A 9,000 m² retail and F&B podium at the base of a new office tower, designed to serve 25,000 daytime workers nearby. An open-air street market operates evenings and weekends, activating an otherwise quiet office-quarter ground floor." },
+      { title: "Nairobi Concept Store District", category: "retail", catLabel: "Retail", location: "Westlands, Nairobi", year: "2023", images: ["gallery/ke-11-kenya-interior.jpg"], desc: "A curated retail campus of 14 individual buildings each designed for its specific tenant, linked by pocket gardens, courtyards and a public art walk. A model of fine-grain retail urbanism in a city dominated by enclosed malls." },
+
+      /* ── INDUSTRIAL & TRANSPORT (12) ── */
+      { title: "Nairobi BRT Network Infrastructure", category: "industrial", catLabel: "Industrial & Transport", location: "Nairobi, Kenya", year: "2024", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "Infrastructure design for Nairobi's six-route BRT network: 48 stations, five terminal bus depots, an operations control centre and a maintenance facility. Stations use a modular kit of timber-framed canopies and accessible level boarding platforms." },
+      { title: "Mombasa Container Terminal Phase 4", category: "industrial", catLabel: "Industrial & Transport", location: "Mombasa, Kenya", year: "2023", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "A new deep-water berth at Kilindini Harbour with 1,800 m of quayside, automated stacking cranes and intermodal rail and road connections directly linking the quayside to the Standard Gauge Railway headshunt." },
+      { title: "JKIA Cargo Village Expansion", category: "industrial", catLabel: "Industrial & Transport", location: "Embakasi, Nairobi", year: "2022", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A 120,000 m² air cargo complex adjacent to JKIA's main apron, with bonded warehousing, cold-chain facilities for cut flowers and perishables, customs inspection halls and a dedicated cargo-only airside vehicle roadway." },
+      { title: "Nairobi Expressway Phase 2", category: "industrial", catLabel: "Industrial & Transport", location: "Nairobi, Kenya", year: "2024", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "Engineering and urban design for the Phase 2 expressway extension from Mlolongo to JKIA and Syokimau SGR station, including three new interchanges, a mainline toll plaza and a signature cable-stayed bridge crossing the Nairobi River." },
+      { title: "Kisumu Port Phase 2 Expansion", category: "industrial", catLabel: "Industrial & Transport", location: "Kisumu, Kenya", year: "2023", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "A major expansion adding a vehicle ferry terminal, passenger services building, fishing industry cold chain and a 2 km public waterfront promenade. The new terminal references the formal language of the historic 1901 rail terminus." },
+      { title: "Athi River Logistics Hub", category: "industrial", catLabel: "Industrial & Transport", location: "Athi River, Kenya", year: "2022", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "A 300,000 m² multi-user logistics facility integrating bonded warehousing, an inland container depot, hazardous goods stores and a customs scanner facility with a dedicated Kenya Revenue Authority team on site." },
+      { title: "Nairobi Commuter Rail Phase 2", category: "industrial", catLabel: "Industrial & Transport", location: "Nairobi, Kenya", year: "2024", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "Extension of Nairobi's commuter rail network with 22 km of electrified track, 11 new stations and a fleet maintenance depot. Stations feature a standardised canopy of curved glulam timber with solar panels integrated into the outer surface." },
+      { title: "Malindi Airport Master Plan", category: "industrial", catLabel: "Industrial & Transport", location: "Malindi, Kenya", year: "2023", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A 20-year master plan guiding a new passenger terminal, extended runway, air traffic control tower and general aviation facility, enabling Malindi to serve as the regional hub for north Kenya's growing coastal tourism market." },
+      { title: "Konza Smart City Logistics Hub", category: "industrial", catLabel: "Industrial & Transport", location: "Konza, Machakos", year: "2024", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "A 200,000 m² last-mile logistics and warehousing complex within Konza Technology City SEZ, with automated picking systems, electric vehicle charging infrastructure and a 5 MW solar array meeting all energy demand from renewable generation." },
+      { title: "Eldoret Airport Cargo Terminal", category: "industrial", catLabel: "Industrial & Transport", location: "Eldoret, Kenya", year: "2022", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "A 30,000 m² cargo terminal dedicated to fresh flower exports, the North Rift's dominant commodity, with specialist cold-chain facilities, phytosanitary inspection halls and a dedicated cargo apron separate from the passenger terminal." },
+      { title: "SGR Nairobi Terminus Precinct", category: "industrial", catLabel: "Industrial & Transport", location: "South B, Nairobi", year: "2023", images: ["gallery/ke-13-nairobi-road.jpg"], desc: "A master plan and architectural design for the 25-hectare precinct around Nairobi's SGR terminus, integrating the station with a 300-room hotel, retail mall, transit-oriented residential and a 4-hectare public park." },
+      { title: "Tatu City Industrial Zone Phase 2", category: "industrial", catLabel: "Industrial & Transport", location: "Ruiru, Kenya", year: "2023", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A managed industrial zone of 150,000 m² within the Tatu City SEZ, with factory units from 500 to 15,000 m², shared utilities, a wastewater treatment plant and a workers welfare complex." },
+
+      /* ── MIXED USE (15) ── */
+      { title: "One Planet — Nairobi", category: "mixed-use", catLabel: "Mixed Use", location: "Westlands, Nairobi", year: "2024", images: ["gallery/ke-12-kenya-green.jpg"], desc: "An 80,000 m² net-zero mixed-use development — the first to achieve Living Building Challenge certification in East Africa. Ground-floor public market, floors 2–8 office and floors 9–20 residential, with 3 MW of BIPV integrated into every south-facing surface." },
+      { title: "The Green Quarter — Westlands", category: "mixed-use", catLabel: "Mixed Use", location: "Westlands, Nairobi", year: "2023", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 40,000 m² mixed-use campus of four interconnected buildings around a 1-hectare public park, with a shared geothermal loop, grey-water recycling plant and rooftop PV array serving all four buildings simultaneously." },
+      { title: "Kilimani Urban Village", category: "mixed-use", catLabel: "Mixed Use", location: "Kilimani, Nairobi", year: "2022", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 30,000 m² urban block developed over a remediated petrol station, introducing a bioretention garden as the centrepiece of a new public realm and setting a new standard for mixed-use density in Kilimani." },
+      { title: "The Riverside Exchange", category: "mixed-use", catLabel: "Mixed Use", location: "Riverside Drive, Nairobi", year: "2024", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 55,000 m² mixed-use development straddling the Nairobi River, with offices on upper levels, retail and restaurants at grade and a two-level public riverine park with native planting and boardwalks embedded within the ground section." },
+      { title: "Nairobi Heights — Upperhill", category: "mixed-use", catLabel: "Mixed Use", location: "Upperhill, Nairobi", year: "2023", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A 100,000 m² mixed-use tower combining 40 floors of Grade A offices, 10 floors of luxury hotel and 8 floors of serviced apartments in a single tapered 58-storey form. The expressed structural concrete core acts as a visible datum against lighter steel-and-glass wings." },
+      { title: "Kisumu Waterfront City Phase 1", category: "mixed-use", catLabel: "Mixed Use", location: "Kisumu, Kenya", year: "2022", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 50-hectare lakefront master plan transforming underused port land into a new urban quarter with 3,000 homes, 80,000 m² of commercial space, a 5-star hotel, museum and 10 hectares of public waterfront park connected by a new light-rail spine." },
+      { title: "Ruaka Urban District", category: "mixed-use", catLabel: "Mixed Use", location: "Ruaka, Nairobi", year: "2024", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 1,500-unit mixed-use district designed to be fully walkable — every resident within 300 m of a market, school, park and community space. The street network uses traffic-calming geometry rather than signage, prioritising pedestrians and cyclists." },
+      { title: "Tatu City Phase 3 — The Village", category: "mixed-use", catLabel: "Mixed Use", location: "Ruiru, Kenya", year: "2023", images: ["gallery/ke-16-kenya-home.jpg"], desc: "Third phase of Tatu City delivering 800 homes, a village square, a primary school and a medical centre, all using a pre-engineered structural system that cut the construction programme by 35%." },
+      { title: "Eastlands Urban Renewal Phase 1", category: "mixed-use", catLabel: "Mixed Use", location: "Eastlands, Nairobi", year: "2024", images: ["gallery/ke-16-kenya-home.jpg"], desc: "First phase of regeneration of a 20-hectare Eastlands brownfield site, delivering 1,500 mixed-tenure homes, a primary school, market hall and a 3-hectare community park, with all public spaces designed to CPTED safety standards." },
+      { title: "Westlands Creative Quarter", category: "mixed-use", catLabel: "Mixed Use", location: "Westlands, Nairobi", year: "2024", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 15,000 m² cultural and creative economy precinct in a repurposed industrial compound, retaining original brick warehouses and adding lightweight glass and steel additions. Permanent residents include art galleries, an architecture school, design studios and a members club." },
+      { title: "Mombasa Old Town Regeneration", category: "mixed-use", catLabel: "Mixed Use", location: "Mombasa, Kenya", year: "2023", images: ["gallery/ke-05-lamu.jpg"], desc: "A sensitive regeneration of a 6-hectare Mombasa Island precinct, inserting contemporary infill buildings in gaps between listed coral-stone houses and designing a new promenade linking the Old Port to the waterfront." },
+      { title: "Nakuru City Quarter", category: "mixed-use", catLabel: "Mixed Use", location: "Nakuru, Kenya", year: "2023", images: ["gallery/ke-02-nairobi-skyline.jpg"], desc: "A 35,000 m² mixed-use development anchoring the new civic quarter of Kenya's newest city, with retail, offices, a hotel and an apartment tower arranged around a new public square." },
+      { title: "Langata Green District", category: "mixed-use", catLabel: "Mixed Use", location: "Langata, Nairobi", year: "2022", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 40,000 m² mixed-use regeneration of Langata Road industrial land, with 300 affordable homes, offices, retail and a 2-hectare public park incorporating Nairobi's first urban food forest." },
+      { title: "Kilifi Waterfront Town Centre", category: "mixed-use", catLabel: "Mixed Use", location: "Kilifi, Kenya", year: "2022", images: ["gallery/ke-05-lamu.jpg"], desc: "A new town centre for the Kilifi County capital, with a central market hall, 40 retail units, a waterfront hotel and a 1 km public promenade along the Kilifi Creek waterfront." },
+      { title: "Nairobi Greenbelt Corridor Plan", category: "mixed-use", catLabel: "Mixed Use", location: "Nairobi, Kenya", year: "2022", images: ["gallery/ke-12-kenya-green.jpg"], desc: "A 22 km linear park master plan following the Ngong Road corridor from Karen to the CBD, combining cycling infrastructure, river rehabilitation, native planting and urban agriculture allotments into a continuous green spine through the city." },
+
+      /* ── HEALTH & EDUCATION (13) ── */
+      { title: "Aga Khan University Hospital — Nairobi", category: "education", catLabel: "Health & Education", location: "Parklands, Nairobi", year: "2024", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A 500-bed teaching hospital campus designed around evidence-based healing principles: maximum natural light in patient areas, acoustic separation between clinical and recovery zones and a 10-hectare campus garden accessible to patients, families and the community." },
+      { title: "MP Shah Oncology & Cancer Centre", category: "education", catLabel: "Health & Education", location: "Parklands, Nairobi", year: "2023", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A purpose-built cancer care centre with radiation therapy bunkers, chemotherapy suites, a specialist palliative care ward and a patient garden — the first therapeutic garden of its kind in East Africa." },
+      { title: "Nairobi Childrens Hospital", category: "education", catLabel: "Health & Education", location: "Ridgeways, Nairobi", year: "2022", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A 250-bed hospital designed from a child's sensory perspective: wards organised as villages at child scale, colour-coded wayfinding, exterior play gardens visible from all inpatient rooms and a rooftop school for long-stay patients." },
+      { title: "Mombasa Cancer Centre", category: "education", catLabel: "Health & Education", location: "Mombasa, Kenya", year: "2023", images: ["gallery/ke-08-africa-modern.jpg"], desc: "The coast region's first dedicated cancer treatment centre, with linear accelerators, chemotherapy suites, a bone marrow transplant unit and a 50-bed ward arranged around a central courtyard sea garden visible from all clinical areas." },
+      { title: "Kisumu Heart & Chest Hospital", category: "education", catLabel: "Health & Education", location: "Kisumu, Kenya", year: "2022", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A specialist cardiology and thoracic surgery hospital on the Lake Victoria shore, with three catheterisation laboratories, an open-heart surgery theatre and a 120-bed recovery wing serving the cardiac disease burden of the Lake Victoria basin." },
+      { title: "Eldoret Regional Medical Centre", category: "education", catLabel: "Health & Education", location: "Eldoret, Kenya", year: "2023", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A new 350-bed regional hospital for the North Rift, with full secondary and tertiary clinical services, a medical school simulation centre and a helicopter landing pad, serving a catchment extending into South Sudan and Uganda." },
+      { title: "University of Nairobi Engineering Faculty", category: "education", catLabel: "Health & Education", location: "Kabete, Nairobi", year: "2022", images: ["gallery/ke-03-nairobi-museum.jpg"], desc: "A 25,000 m² engineering faculty with advanced laboratory floors, a student innovation hub, a wind tunnel and a rooftop observatory. The exposed concrete structure is designed to demonstrate structural engineering principles as a living teaching tool." },
+      { title: "Strathmore University Engineering Block", category: "education", catLabel: "Health & Education", location: "Madaraka, Nairobi", year: "2023", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A new engineering and applied sciences block with solar-calibration labs, a clean room, a fabrication workshop and a collaboration atrium. Kenya's first university building to achieve BREEAM Excellent certification." },
+      { title: "USIU-Africa Innovation Hub", category: "education", catLabel: "Health & Education", location: "Kasarani, Nairobi", year: "2024", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A 10,000 m² innovation campus with incubator spaces, a fintech lab, a bioscience wet lab and a public-facing entrepreneur academy, all designed around a central collision space that maximises accidental inter-disciplinary encounters." },
+      { title: "Aga Khan Academy Mombasa Campus", category: "education", catLabel: "Health & Education", location: "Mombasa, Kenya", year: "2024", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A new IB school campus on a 20-acre Mombasa site, designed for the tropical coastal climate with naturally ventilated classrooms, covered external teaching spaces, a swimming pool and a 700-seat performing arts centre at the campus heart." },
+      { title: "Mombasa Technical University Masterplan", category: "education", catLabel: "Health & Education", location: "Mombasa, Kenya", year: "2023", images: ["gallery/ke-14-africa-archi.jpg"], desc: "A 20-year campus master plan rationalising the existing ad-hoc layout into a legible campus with a clear pedestrian spine, new central library, student union building and an engineering laboratory complex designed for a tropical coastal climate." },
+      { title: "Maseno University Research Institute", category: "education", catLabel: "Health & Education", location: "Kisumu, Kenya", year: "2023", images: ["gallery/ke-03-nairobi-museum.jpg"], desc: "A new interdisciplinary research facility focused on Lake Victoria environmental science, public health and digital technology, designed as a series of pavilions on the lake bluff with outdoor research platforms cantilevered over the shoreline." },
+      { title: "Gertrudes Hospital — Paediatric Wing", category: "education", catLabel: "Health & Education", location: "Muthaiga, Nairobi", year: "2024", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A 150-bed paediatric wing with a dedicated oncology floor, bone marrow transplant unit and family support centre. The exterior is a large-scale mural by a Kenyan children's illustrator, turning the building facade into a welcoming, child-friendly landmark." }
+    ];
+
+    var filtered = PROJECTS.slice();
+    var currentIdx = 0;
+
+    function renderGrid(list) {
+      var grid = document.getElementById('portfolioGrid');
+      var count = document.getElementById('pfCount');
+      if (!grid) return;
+      grid.innerHTML = '';
+      if (count) count.textContent = list.length + ' Project' + (list.length !== 1 ? 's' : '');
+      list.forEach(function (p, i) {
+        var card = document.createElement('div');
+        card.className = 'pf-card';
+        card.innerHTML =
+          '<img src="' + p.images[0] + '" alt="' + p.title + '" loading="lazy">' +
+          '<div class="pf-card-overlay">' +
+            '<div class="pf-card-cat">' + p.catLabel + '</div>' +
+            '<div class="pf-card-name">' + p.title + '</div>' +
+          '</div>';
+        card.addEventListener('click', function () { openModal(i); });
+        grid.appendChild(card);
+      });
+    }
+
+    function setMainImg(src, alt) {
+      var img = document.getElementById('pfMainImg');
+      if (img) { img.src = src; img.alt = alt; }
+    }
+
+    function openModal(idx) {
+      currentIdx = idx;
+      var p = filtered[idx];
+      var modal = document.getElementById('pfModal');
+      if (!modal) return;
+      document.getElementById('pfModalCat').textContent = p.catLabel;
+      document.getElementById('pfModalTitle').textContent = p.title;
+      document.getElementById('pfModalLoc').innerHTML = '<strong>Location</strong> \u2014 ' + p.location;
+      document.getElementById('pfModalYear').innerHTML = '<strong>Year</strong> \u2014 ' + p.year;
+      document.getElementById('pfModalDesc').textContent = p.desc;
+      setMainImg(p.images[0], p.title);
+      var thumbsEl = document.getElementById('pfThumbs');
+      thumbsEl.innerHTML = '';
+      p.images.forEach(function (imgSrc, i) {
+        var t = document.createElement('div');
+        t.className = 'pf-thumb' + (i === 0 ? ' active' : '');
+        t.innerHTML = '<img src="' + imgSrc + '" alt="">';
+        (function (src, el) {
+          el.addEventListener('click', function () {
+            setMainImg(src, p.title);
+            thumbsEl.querySelectorAll('.pf-thumb').forEach(function (x) { x.classList.remove('active'); });
+            el.classList.add('active');
+          });
+        })(imgSrc, t);
+        thumbsEl.appendChild(t);
+      });
+      document.getElementById('pfPrev').disabled = (idx === 0);
+      document.getElementById('pfNext').disabled = (idx === filtered.length - 1);
+      modal.style.display = 'flex';
+      requestAnimationFrame(function () { modal.classList.add('is-open'); });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      var modal = document.getElementById('pfModal');
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      setTimeout(function () { modal.style.display = 'none'; }, 280);
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('portfolioFilter').addEventListener('change', function () {
+      var cat = this.value;
+      filtered = cat === 'all' ? PROJECTS.slice() : PROJECTS.filter(function (p) { return p.category === cat; });
+      renderGrid(filtered);
     });
+    document.getElementById('pfClose').addEventListener('click', closeModal);
+    document.getElementById('pfModal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+    document.getElementById('pfPrev').addEventListener('click', function () { if (currentIdx > 0) openModal(currentIdx - 1); });
+    document.getElementById('pfNext').addEventListener('click', function () { if (currentIdx < filtered.length - 1) openModal(currentIdx + 1); });
+    document.addEventListener('keydown', function (e) {
+      var modal = document.getElementById('pfModal');
+      if (!modal || !modal.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft' && currentIdx > 0) openModal(currentIdx - 1);
+      if (e.key === 'ArrowRight' && currentIdx < filtered.length - 1) openModal(currentIdx + 1);
+    });
+
+    renderGrid(filtered);
   })();
 
+  // === Gallery category filter (legacy — removed) ===
 
   // === Animated counter for stat numbers ===
   (function () {
@@ -2168,5 +2355,25 @@
         orb.style.transform = 'translate(' + (x * factor) + 'px, ' + (y * factor) + 'px)';
       });
     }, { passive: true });
+  })();
+
+  // === Gallery category filter ===
+  (function () {
+    var bar = document.querySelector('.gallery-filter-bar');
+    if (!bar) return;
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.gf-btn');
+      if (!btn) return;
+      bar.querySelectorAll('.gf-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.gallery-card').forEach(function (card) {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('gf-hidden');
+        } else {
+          card.classList.add('gf-hidden');
+        }
+      });
+    });
   })();
 </script>

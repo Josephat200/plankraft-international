@@ -1,12 +1,12 @@
-import http.server
-import os
 import gzip
+import http.server
 import io
 import mimetypes
+import os
 import socketserver
 from functools import partial
 
-PORT = 5000
+PORT = int(os.environ.get("PORT", "5000"))
 HOST = "0.0.0.0"
 DIRECTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public")
 
