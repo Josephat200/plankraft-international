@@ -317,7 +317,7 @@
     z-index: 2;
   }
 
-  .hero > div {
+  .hero-content {
     z-index: 3;
     max-width: var(--container);
     width: 100%;
@@ -331,19 +331,23 @@
     display: flex;
     align-items: center;
     overflow: hidden;
+    background:
+      url('hero-bg.jpg') center center / cover no-repeat,
+      linear-gradient(135deg, #1a1714 0%, #25221E 100%);
   }
 
   /* On small screens prefer top-aligned background for better framing */
   @media (max-width: 860px) {
+    .hero { background-position: center top, center center; }
     .hero-img-bg { background-position: center top; }
   }
-  .hero > div > * { animation: slideUp 0.7s var(--ease) backwards; }
-  .hero > div > *:nth-child(1) { animation-delay: 0.05s; }
-  .hero > div > *:nth-child(2) { animation-delay: 0.15s; }
-  .hero > div > *:nth-child(3) { animation-delay: 0.25s; }
-  .hero > div > *:nth-child(4) { animation-delay: 0.35s; }
-  .hero > div > *:nth-child(5) { animation-delay: 0.45s; }
-  .hero > div > *:nth-child(6) { animation-delay: 0.55s; }
+  .hero-content > * { animation: slideUp 0.7s var(--ease) backwards; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.45s; }
+  .hero-content > *:nth-child(6) { animation-delay: 0.55s; }
 
   .hero-eyebrow {
     font-size: 0.72rem; letter-spacing: 0.28em;
@@ -1408,7 +1412,7 @@
       <div class="hero-orb"></div>
       <div class="hero-orb"></div>
       <div class="hero-orb"></div>
-      <div style="position: relative;">
+      <div class="hero-content" style="position: relative;">
         <p class="hero-eyebrow">Nairobi, Kenya &mdash; Architecture &amp; Design</p>
         <h1>Spaces that <em>endure.</em><br>Design that matters.</h1>
         <div class="hero-divider"></div>
