@@ -1,6 +1,6 @@
 # Plankraft International Website
 
-A static one-page website for Plankraft International, a Nairobi-based architecture & design practice. Built as a single HTML file with embedded CSS/JS and two team photos.
+A static one-page website for Plankraft International, a Nairobi-based architecture & design practice. Built as a single HTML file with embedded CSS/JS and supporting assets.
 
 ## Project Structure
 
@@ -31,18 +31,19 @@ A static one-page website for Plankraft International, a Nairobi-based architect
 │       ├── ke-14-africa-archi.jpg   # Bomas of Kenya
 │       ├── ke-15-safari-lodge.jpg   # Rift Valley tented lodges
 │       └── ke-16-kenya-home.jpg     # Kenya affordable housing programme
-├── server.py                        # Python static file server with gzip + smart caching
+├── package.json                     # Minimal Node project metadata and start script
+├── server.js                        # Node static file server with gzip + smart caching
 └── Test plankraft_international_website.html  # Original source HTML (kept for reference)
 ```
 
 ## How It Runs
 
-`server.py` serves the `public/` directory on `0.0.0.0:5000` with:
+`server.js` serves the `public/` directory on `0.0.0.0:5000` with:
 - **Gzip compression** for HTML/CSS/JS files
 - **Long-term caching** for images/assets (30-day max-age)
 - **No-cache** for HTML so the preview always shows fresh content
 
-The single workflow `Start application` runs `python3 server.py` on port 5000.
+The single workflow `Start application` runs `npm start` on port 5000.
 
 ## Local Editing
 
@@ -53,6 +54,7 @@ Edit `public/index.html` directly. No build step — just refresh the preview.
 - **Four sections** (Home, What We Do, Who We Are, Contact Us) shown via JS `showSection()` switching, with hash-based deep links.
 - **What We Do — Portfolio showcase:** dropdown category filter (All / Hospitality & Leisure / Civil & Culture / Residential / Offices / Retail / Industrial & Transport / Mixed Use / Health & Education) + 4-column responsive project grid. Clicking any card opens a full-screen lightbox modal with large featured image, thumbnail strip for multi-image projects, project title / location / year / description, Prev/Next navigation, and keyboard support (Escape / Arrow keys).
 - **Who We Are:** team cards for Kisia Kibiyi Julius and Mwita Christopher Mangiti with photos, roles, bios, and skill tags. Stats strip with animated counters.
+- **Who We Are:** team cards for Kisia Kibiyi Julius and Mwita Christopher Mangiti with photos, roles, bios, and skill tags.
 - **Scroll-reveal animations** via IntersectionObserver.
 - **Floating ambient orbs** on the hero with CSS keyframe animation and mouse-parallax.
 - **Animated stat counters** on the hero.
