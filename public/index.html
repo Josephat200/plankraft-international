@@ -251,7 +251,17 @@
     z-index: 95;
     will-change: transform;
   }
-  .hero-img-bg.loaded { transform: scale(1); }
+  .hero-img-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('hero-bg.jpg');
+    background-size: cover; background-position: center center;
+    background-repeat: no-repeat;
+    transform: scale(1.06);
+    transition: transform 12s ease, opacity 0.8s ease;
+    opacity: 0.0;
+    will-change: transform, opacity;
+  }
+  .hero-img-bg.loaded { transform: scale(1); opacity: 1; }
 
   /* Multi-layer overlay for text legibility */
   .hero-bg {
@@ -1822,7 +1832,8 @@
         heroBg.classList.add('loaded');
       });
     };
-    img.src = 'hero-bg.png';
+    // Prefer the packaged JPEG hero image for better quality in production
+    img.src = 'hero-bg.jpg';
     // If already cached, trigger immediately
     if (img.complete) heroBg.classList.add('loaded');
   })();
