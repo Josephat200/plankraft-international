@@ -254,7 +254,7 @@
   .hero-img-bg {
     position: absolute; inset: 0; z-index: 0;
     background-image: url('hero-bg.jpg');
-    background-size: cover; background-position: center center;
+    background-size: cover; background-position: center right;
     background-repeat: no-repeat;
     transform: scale(1.06);
     transition: transform 12s ease, opacity 0.8s ease;
@@ -322,6 +322,20 @@
     max-width: var(--container);
     width: 100%;
     margin: 0 auto;
+  }
+
+  /* Ensure hero fills the viewport and keeps content legible */
+  .hero {
+    position: relative;
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* On small screens prefer top-aligned background for better framing */
+  @media (max-width: 860px) {
+    .hero-img-bg { background-position: center top; }
   }
   .hero > div > * { animation: slideUp 0.7s var(--ease) backwards; }
   .hero > div > *:nth-child(1) { animation-delay: 0.05s; }
