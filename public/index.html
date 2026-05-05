@@ -8,6 +8,15 @@
   body { background: #fff; min-height: 100vh; }
   img { max-width: 100%; display: block; }
 
+  /* Section switching: show one page at a time */
+  .pk-site > section {
+    display: none;
+    min-height: calc(100vh - var(--nav-h));
+  }
+  .pk-site > section.active {
+    display: block;
+  }
+
   /* === Theme tokens === */
   :root {
     /* Primary — refined stone */
