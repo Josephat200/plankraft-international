@@ -108,12 +108,12 @@
     backdrop-filter: saturate(180%) blur(14px);
     -webkit-backdrop-filter: saturate(180%) blur(14px);
     z-index: 100;
-    transition: box-shadow var(--t), background var(--t), padding var(--t);
+    /* Avoid animating layout-affecting properties (padding) to reduce jank */
+    transition: box-shadow var(--t), background var(--t);
   }
   nav.scrolled {
     box-shadow: 0 4px 24px rgba(44,42,38,0.06);
     background: rgba(255,255,255,0.97);
-    padding-top: 0.9rem; padding-bottom: 0.9rem;
   }
 
   .logo {
@@ -253,15 +253,16 @@
   }
   .hero-img-bg {
     position: absolute; inset: 0; z-index: 0;
-    background-image: url('hero-bg.jpg');
+    background-image: url('https://media.istockphoto.com/id/168386317/photo/architecture-blueprint.jpg?s=612x612&w=0&k=20&c=3xOq5UMomZtww1-c8HtK8pdPMdjNDf6S6fPaf1oWxBM=');
     background-size: cover; background-position: center right;
     background-repeat: no-repeat;
-    transform: scale(1.06);
-    transition: transform 12s ease, opacity 0.8s ease;
+    /* Production: remove long-running zoom to prevent shaking */
+    transform: none;
+    transition: opacity 0.8s ease;
     opacity: 0.0;
     will-change: transform, opacity;
   }
-  .hero-img-bg.loaded { transform: scale(1); opacity: 1; }
+  .hero-img-bg.loaded { opacity: 1; }
 
   /* Multi-layer overlay for text legibility */
   .hero-bg {
@@ -332,7 +333,7 @@
     align-items: center;
     overflow: hidden;
     background:
-      url('hero-bg.jpg') center center / cover no-repeat,
+      url('https://media.istockphoto.com/id/168386317/photo/architecture-blueprint.jpg?s=612x612&w=0&k=20&c=3xOq5UMomZtww1-c8HtK8pdPMdjNDf6S6fPaf1oWxBM=') center center / cover no-repeat,
       linear-gradient(135deg, #1a1714 0%, #25221E 100%);
   }
 
@@ -691,6 +692,15 @@
   .about-intro { max-width: 740px; margin: 0 0 clamp(2.5rem, 5vw, 4rem) 0; }
 
   /* Disciplines strip inside Who We Are */
+  .services-heading {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #0b57d0; /* same blue used for chips */
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.6rem;
+  }
+
   .discipline-strip {
     display: flex;
     flex-wrap: nowrap;
@@ -704,31 +714,31 @@
     border: 1px solid var(--line);
     border-radius: 999px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
     line-height: 1.3;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--warm-deep);
-    font-weight: 700;
+    color: #0b57d0;
+    font-weight: 800;
     background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,247,242,0.96));
     box-shadow: 0 18px 34px rgba(37,34,30,0.04);
     transition: transform var(--t), border-color var(--t), box-shadow var(--t), background var(--t), color var(--t);
   }
   .discipline-item:nth-child(1) {
-    color: var(--warm-deep);
-    border-color: rgba(185,138,79,0.18);
+    color: #0b57d0;
+    border-color: rgba(11,87,208,0.2);
   }
   .discipline-item:nth-child(2) {
-    color: var(--sage-deep);
-    border-color: rgba(77,91,66,0.08);
+    color: #0b57d0;
+    border-color: rgba(11,87,208,0.2);
   }
   .discipline-item:nth-child(3) {
-    color: var(--clay);
-    border-color: rgba(184,98,74,0.08);
+    color: #0b57d0;
+    border-color: rgba(11,87,208,0.2);
   }
   .discipline-item:nth-child(4) {
-    color: var(--stone-deep);
-    border-color: rgba(21,19,15,0.08);
+    color: #0b57d0;
+    border-color: rgba(11,87,208,0.2);
   }
   .discipline-item:hover {
     transform: translateY(-2px);
@@ -1232,35 +1242,29 @@
     pointer-events: none;
     mix-blend-mode: screen;
     filter: blur(70px);
-    animation: orbDrift 12s ease-in-out infinite;
+    /* Disabled ambient motion for production stability */
+    animation: none !important;
     z-index: 2;
   }
   .hero-orb:nth-child(3) {
     width: 380px; height: 380px;
     background: radial-gradient(circle, rgba(185,138,79,0.32) 0%, transparent 70%);
     top: 5%; right: 8%;
-    animation-duration: 14s;
+    /* ambient animation disabled */
   }
   .hero-orb:nth-child(4) {
     width: 280px; height: 280px;
     background: radial-gradient(circle, rgba(220,176,114,0.22) 0%, transparent 70%);
     bottom: 12%; right: 20%;
-    animation-duration: 18s;
-    animation-delay: -5s;
+    /* ambient animation disabled */
   }
   .hero-orb:nth-child(5) {
     width: 220px; height: 220px;
     background: radial-gradient(circle, rgba(107,124,94,0.20) 0%, transparent 70%);
     top: 40%; left: 3%;
-    animation-duration: 22s;
-    animation-delay: -9s;
+    /* ambient animation disabled */
   }
-  @keyframes orbDrift {
-    0%   { transform: translateY(0) translateX(0) scale(1); }
-    33%  { transform: translateY(-22px) translateX(14px) scale(1.06); }
-    66%  { transform: translateY(12px) translateX(-18px) scale(0.96); }
-    100% { transform: translateY(0) translateX(0) scale(1); }
-  }
+  /* orbDrift keyframes removed for production stability */
 
   /* === Gallery card enhanced hover === */
   .gallery-card {
@@ -1312,16 +1316,19 @@
   .philosophy-strip::after {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
+    top: 0; left: 0;
     width: 60%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-    animation: stripShine 6s ease-in-out infinite;
+    /* Use transform for motion (GPU-accelerated) to avoid layout reflows */
+    transform: translateX(-100%);
+    animation: stripShine 6s linear infinite;
     pointer-events: none;
+    will-change: transform;
   }
   @keyframes stripShine {
-    0%   { left: -100%; }
-    60%, 100% { left: 160%; }
+    0%   { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(160%); }
   }
 
   /* === Team card enhanced === */
@@ -1506,6 +1513,7 @@
         <p>We believe the best architecture emerges from curiosity, collaboration, and an uncompromising commitment to craft &mdash; and we bring all three to every project we touch.</p>
       </div>
 
+      <div class="services-heading">Our Services</div>
       <div class="discipline-strip" aria-label="Disciplines we work in">
         <div class="discipline-item">Architectural Design</div>
         <div class="discipline-item">Interior Design</div>
@@ -1621,7 +1629,8 @@
           <iframe
             id="contactMap"
             title="Plankraft International Location Map"
-            src="https://www.google.com/maps?output=embed&saddr=Nairobi+CBD&daddr=Masta+Villa+Plaza,+Highpoint,+Juja,+Kenya&dirflg=d"
+            data-src="https://www.google.com/maps?output=embed&saddr=Nairobi+CBD&daddr=Masta+Villa+Plaza,+Highpoint,+Juja,+Kenya&dirflg=d"
+            src="about:blank"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen>
@@ -1683,6 +1692,25 @@
     const head = document.head || document.getElementsByTagName('head')[0];
     if (!head) return;
 
+    const preconnects = [
+      'https://www.google.com',
+      'https://maps.google.com',
+      'https://maps.gstatic.com'
+    ];
+
+    preconnects.forEach(function (href) {
+      const preconnect = document.createElement('link');
+      preconnect.rel = 'preconnect';
+      preconnect.href = href;
+      preconnect.crossOrigin = 'anonymous';
+      head.appendChild(preconnect);
+
+      const dnsPrefetch = document.createElement('link');
+      dnsPrefetch.rel = 'dns-prefetch';
+      dnsPrefetch.href = href;
+      head.appendChild(dnsPrefetch);
+    });
+
     const links = [
       { rel: 'icon', href: 'logo.jpeg', type: 'image/jpeg' },
       { rel: 'shortcut icon', href: 'logo.jpeg', type: 'image/jpeg' },
@@ -1713,12 +1741,29 @@
     return 'https://www.google.com/maps?output=embed&saddr=' + encodeURIComponent(origin) + '&daddr=' + encodeURIComponent(destinationAddress) + '&dirflg=d';
   }
 
+  function ensureContactMapLoaded(origin) {
+    const map = document.getElementById('contactMap');
+    if (!map) return;
+
+    if (!map.dataset.loaded) {
+      map.src = map.dataset.src || buildDirectionsEmbed(origin || 'Nairobi CBD');
+      map.dataset.loaded = 'true';
+      map.loading = 'eager';
+      return;
+    }
+
+    if (origin) {
+      map.src = buildDirectionsEmbed(origin);
+    }
+  }
+
   function updateDirections(origin) {
     const map = document.getElementById('contactMap');
     const note = document.getElementById('directionsNote');
     const link = document.getElementById('openDirections');
     if (!map || !note || !link) return;
 
+    ensureContactMapLoaded(origin);
     map.src = buildDirectionsEmbed(origin);
     link.href = 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destinationAddress) + '&travelmode=driving';
     note.textContent = 'Showing driving directions from ' + origin + '. Google Maps displays exact distance and ETA in the route panel.';
@@ -1770,6 +1815,9 @@
     }
     if (history.replaceState) history.replaceState(null, '', '#' + id);
     window.scrollTo({ top: 0, behavior: 'auto' });
+    if (id === 'contact-us') {
+      ensureContactMapLoaded(document.getElementById('startPoint')?.value || 'Nairobi CBD');
+    }
     closeMobileNav();
   }
 
@@ -1806,6 +1854,9 @@
   (function initFromHash() {
     const hash = (location.hash || '').replace('#', '');
     if (hash && document.getElementById(hash)) showSection(hash);
+    if (hash === 'contact-us') {
+      ensureContactMapLoaded(document.getElementById('startPoint')?.value || 'Nairobi CBD');
+    }
   })();
 
   window.addEventListener('hashchange', function () {
@@ -1868,8 +1919,8 @@
         heroBg.classList.add('loaded');
       });
     };
-    // Prefer the packaged JPEG hero image for better quality in production
-    img.src = 'hero-bg.jpg';
+    // Use the selected homepage background image.
+    img.src = 'https://media.istockphoto.com/id/168386317/photo/architecture-blueprint.jpg?s=612x612&w=0&k=20&c=3xOq5UMomZtww1-c8HtK8pdPMdjNDf6S6fPaf1oWxBM=';
     // If already cached, trigger immediately
     if (img.complete) heroBg.classList.add('loaded');
   })();
@@ -2029,7 +2080,19 @@
       { title: "Gertrudes Hospital — Paediatric Wing", category: "education", catLabel: "Health & Education", location: "Muthaiga, Nairobi", year: "2024", images: ["gallery/ke-08-africa-modern.jpg"], desc: "A 150-bed paediatric wing with a dedicated oncology floor, bone marrow transplant unit and family support centre. The exterior is a large-scale mural by a Kenyan children's illustrator, turning the building facade into a welcoming, child-friendly landmark." }
     ];
 
-    var filtered = PROJECTS.slice();
+    function dedupeProjectsByPrimaryImage(projects) {
+      var seen = new Set();
+      return projects.filter(function (project) {
+        var primaryImage = project.images && project.images[0] ? project.images[0] : '';
+        if (!primaryImage) return true;
+        if (seen.has(primaryImage)) return false;
+        seen.add(primaryImage);
+        return true;
+      });
+    }
+
+    var UNIQUE_PROJECTS = dedupeProjectsByPrimaryImage(PROJECTS);
+    var filtered = UNIQUE_PROJECTS.slice();
     var currentIdx = 0;
 
     function renderGrid(list) {
@@ -2100,7 +2163,7 @@
 
     document.getElementById('portfolioFilter').addEventListener('change', function () {
       var cat = this.value;
-      filtered = cat === 'all' ? PROJECTS.slice() : PROJECTS.filter(function (p) { return p.category === cat; });
+      filtered = cat === 'all' ? UNIQUE_PROJECTS.slice() : UNIQUE_PROJECTS.filter(function (p) { return p.category === cat; });
       renderGrid(filtered);
     });
     document.getElementById('pfClose').addEventListener('click', closeModal);
