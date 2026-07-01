@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "description": "Static website for Plankraft International",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo \"Static site is ready in public/\""
   },
   "engines": {
     "node": ">=20"
