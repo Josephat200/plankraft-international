@@ -106,7 +106,10 @@ function setSecurityHeaders(res) {
   res.setHeader('Referrer-Policy', 'no-referrer-when-downgrade');
   res.setHeader('Permissions-Policy', 'geolocation=(), camera=()');
   // Allow images from same origin and https sources; adjust for production needs
-  res.setHeader('Content-Security-Policy', "default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; object-src 'none'; frame-ancestors 'none';");
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; img-src 'self' https: data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https:; script-src 'self' 'unsafe-inline' https:; frame-src 'self' https://www.google.com https://maps.google.com https://maps.gstatic.com; object-src 'none'; frame-ancestors 'none';"
+  );
   // HSTS - only effective when serving over HTTPS
   res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
 }
