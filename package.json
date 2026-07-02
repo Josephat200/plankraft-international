@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "node tools/verify-static-site.js"
+    "build": "node tools/verify-static-site.js && node tools/generate-seo-files.js"
   },
   "engines": {
     "node": ">=20"

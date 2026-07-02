@@ -1,3 +1,62 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plankraft International | Architecture &amp; Design in Kenya</title>
+<meta name="description" content="Plankraft International is a Nairobi-based architecture and design practice delivering residential, commercial, and mixed-use projects across Kenya.">
+<meta name="author" content="Plankraft International">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#B98A4F">
+<link rel="canonical" href="/" id="canonicalLink">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plankraft International">
+<meta property="og:title" content="Plankraft International | Architecture &amp; Design in Kenya">
+<meta property="og:description" content="Architecture, interior design, masterplanning, and project management with a Nairobi-based team.">
+<meta property="og:url" content="/">
+<meta property="og:image" content="/hero-bg.jpg">
+<meta property="og:image:alt" content="Plankraft International architecture hero image">
+<meta property="og:locale" content="en_KE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Plankraft International | Architecture &amp; Design in Kenya">
+<meta name="twitter:description" content="Architecture, interior design, masterplanning, and project management with a Nairobi-based team.">
+<meta name="twitter:image" content="/hero-bg.jpg">
+<script>
+  (function () {
+    var origin = window.location.origin;
+    var canonicalLink = document.getElementById('canonicalLink');
+    if (canonicalLink) canonicalLink.href = origin + '/';
+
+    var ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', origin + '/');
+
+    var ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage) ogImage.setAttribute('content', origin + '/hero-bg.jpg');
+
+    var twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (twitterImage) twitterImage.setAttribute('content', origin + '/hero-bg.jpg');
+
+    var structuredData = {
+      "@context": "https://schema.org",
+      "@type": "ArchitecturalBusiness",
+      "name": "Plankraft International",
+      "url": origin + "/",
+      "logo": origin + "/logo.jpeg",
+      "image": origin + "/hero-bg.jpg",
+      "email": "plankraft.intl@gmail.com",
+      "telephone": ["+254708717207", "+254759303710"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Masta Villa Plaza, Highpoint, Juja",
+        "addressLocality": "Juja",
+        "addressRegion": "Kiambu County",
+        "addressCountry": "KE"
+      }
+    };
+
+    var ldJson = document.createElement('script');
+    ldJson.type = 'application/ld+json';
+    ldJson.textContent = JSON.stringify(structuredData);
+    document.head.appendChild(ldJson);
+  })();
+</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
