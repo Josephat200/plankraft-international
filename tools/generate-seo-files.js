@@ -4,13 +4,24 @@ const path = require('path');
 const rootDir = path.resolve(__dirname, '..');
 const publishDir = path.join(rootDir, 'public');
 
-const baseUrl = String(
+function fail(message) {
+  console.error(message);
+  process.exit(1);
+}
+
+const resolvedUrl = String(
   process.env.SITE_URL ||
   process.env.URL ||
   process.env.DEPLOY_PRIME_URL ||
   process.env.DEPLOY_URL ||
-  'https://YOUR-DOMAIN-HERE.com'
-).replace(/\/$/, '');
+  ''
+).trim().replace(/\/$/, '');
+
+const baseUrl = resolvedUrl || (process.env.NETLIFY === 'true' ? '' : 'http://localhost:5000');
+
+if (!baseUrl) {
+  fail('Set SITE_URL (or ensure Netlify provides URL/DEPLOY_PRIME_URL) before building for production.');
+}
 
 function writeFile(filePath, content) {
   fs.writeFileSync(filePath, content, 'utf8');
